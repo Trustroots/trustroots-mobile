@@ -6,13 +6,15 @@ type Props = {
   label: string,
   transparent?: boolean,
   width?: number,
+  small?: boolean,
   onPress: () => void
 }
 
-const Button = ({label, transparent, onPress, width}: Props) => {
+const Button = ({label, transparent, onPress, width, small}: Props) => {
   return (
     <TouchableOpacity
       style={{
+        ...(small ? buttonStyleSmall : buttonStyle),
         ...(transparent ? styles.transparent : styles.normal),
         ...(width ? {width} : {})
       }}
@@ -31,11 +33,19 @@ const buttonStyle = {
   paddingBottom: 12,
   paddingLeft: 24,
   paddingRight: 24,
+  fontWeight: 'bold'
+}
+
+const buttonStyleSmall = {
+  marginTop: 10,
+  paddingTop: 8,
+  paddingBottom: 8,
+  paddingLeft: 16,
+  paddingRight: 16,
 }
 
 const styles = StyleSheet.create({
   normal: {
-    ...buttonStyle,
     alignItems: 'center',
     backgroundColor: colors.button
   },
@@ -45,7 +55,6 @@ const styles = StyleSheet.create({
   },
 
   transparent: {
-    ...buttonStyle,
     alignItems: 'center',
     backgroundColor: 'transparent',
     borderWidth: 1,
@@ -54,7 +63,6 @@ const styles = StyleSheet.create({
 
   transparentText: {
     color: colors.foreground,
-    fontWeight: 'bold'
   }
 })
 

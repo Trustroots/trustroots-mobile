@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, StatusBar } from 'react-native'
 
 import BackButton from '../components/BackButton'
 import Background from '../components/Background'
+import Button from '../components/Button'
 // import Button from '../components/Button'
 
 const Login = () => {
@@ -10,9 +11,26 @@ const Login = () => {
     <View style={styles.container}>
       <StatusBar barStyle='light-content' animated />
       <Background image={require('../../assets/background.nordic.jpg')} />
-
       <BackButton />
-      <Text>login</Text>
+
+      <Text>Email or username</Text>
+      <Text>Password</Text>
+
+      <Button
+        label="Login"
+        small
+        onPress={() => false}
+      />
+
+      <Text>Forgot?</Text>
+
+      <Button
+        label="Become a member"
+        transparent
+        small
+        onPress={() => false}
+      />
+      <Text>or Back home</Text>
     </View>
   )
 }
