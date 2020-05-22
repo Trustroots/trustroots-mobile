@@ -3,5 +3,8 @@ export default {
   foreground: '#fff',
 
   text: '#333',
-  link: '#cd771b'
+  link: '#cd771b',
+
+  button: '#fff',
+  buttonText: '#12B591',
 }

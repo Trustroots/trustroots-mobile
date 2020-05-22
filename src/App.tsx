@@ -4,6 +4,7 @@ import { StyleSheet, View, Text, Image, useWindowDimensions } from 'react-native
 import Logo from '../assets/logo-white.svg'
 import colors from './common/colors'
 import style from './common/styles'
+import Button from './components/Button';
 
 const App = () => {
   const { width, height } = useWindowDimensions()
@@ -24,6 +25,9 @@ const App = () => {
         <Text style={styles.subtitle}>
           Sharing, hosting and getting people together.
         </Text>
+
+        <Button label="Join Trustroots now" />
+        <Button label="Login" transparent />
       </View>
     </>
   )
@@ -33,7 +37,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    padding: 20,
   },
   title: {
     ...style.shadow,
@@ -42,13 +47,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     color: colors.foreground,
+    textAlign: 'center'
   },
   subtitle: {
     ...style.shadow,
     textShadowRadius: 4,
     marginTop: 10,
     fontWeight: 'bold',
-    color: colors.foreground
+    color: colors.foreground,
+    textAlign: 'center'
   }
 })
 
