@@ -33,10 +33,8 @@ export default function reducer(state = initialState, action: any = {}) {
       }
 
     case LOGIN_SUCCESS:
-      const { session } = payload
       return {
         ...state,
-        session,
         authenticating: null
       }
 

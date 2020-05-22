@@ -1,6 +1,8 @@
-import React from 'react'
-import { StyleSheet, Platform, View, Text, StatusBar, SafeAreaView, KeyboardAvoidingView, TouchableOpacity } from 'react-native'
-import { useDispatch } from 'react-redux'
+import React, { useEffect, useRef } from 'react'
+import { StyleSheet, Platform, View, Text, StatusBar, SafeAreaView, KeyboardAvoidingView, TouchableOpacity, Keyboard } from 'react-native'
+import { useDispatch, useSelector } from 'react-redux'
+
+import Toast from 'react-native-easy-toast'
 
 import BackButton from '../components/BackButton'
 import Background from '../components/Background'
@@ -49,6 +51,16 @@ const ButtonRow = ({label, width, text, transparent, onButtonPress, onTextPress,
 
 const Login = () => {
   const dispatch = useDispatch()
+      , authenticating = useSelector(state => state.app.authenticating)
+      , toastRef = useRef(null)
+
+  useEffect(() => {
+    if (authenticating === false) {
+      console.log(toastRef.current)
+      toastRef.current.show('Login failed...', 3000)
+    }
+  }, [authenticating, toastRef])
+
   return (
     <SafeAreaView style={styles.container} testID="login.scene">
       <StatusBar barStyle='light-content' animated />
@@ -79,7 +91,11 @@ const Login = () => {
           label="Login"
           text="Forgot?"
           width={100}
-          onButtonPress={() => dispatch({type: LOGIN_REQUEST})}
+          onButtonPress={() => {
+            Keyboard.dismiss()
+            toastRef.current.show('Trying to log you in..', 3000)
+            dispatch({type: LOGIN_REQUEST})
+          }}
           onTextPress={() => null}
         />
 
@@ -93,7 +109,7 @@ const Login = () => {
           text="Back home"
           transparent
         />
-
+        <Toast ref={toastRef} />
       </KeyboardAvoidingView>
     </SafeAreaView>
   )
