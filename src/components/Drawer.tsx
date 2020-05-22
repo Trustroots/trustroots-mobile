@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.drawerContent
   },
   footer: {
-    backgroundColor: colors.drawerContent,
+    backgroundColor: colors.drawerFooter,
     height: 20,
     alignItems: 'center',
     justifyContent: 'center'

@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     bottom: 5
   },
   text: {
-    color: colors.foreground,
+    color: colors.version,
     fontSize: 10
   }
 })

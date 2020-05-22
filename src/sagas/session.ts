@@ -56,8 +56,8 @@ function* logoutFlow() {
   yield put(formActions.reset('drafts'))
   yield put(formActions.change('login.password', ''))
 
-  // Throw the user back to the login screen
-  Actions.reset('login')
+  // Throw the user back to the welcome screen
+  Actions.reset('welcome')
 
   // Delete the previously stored password from the secure location
   yield Keychain.resetGenericPassword()
@@ -66,7 +66,7 @@ function* logoutFlow() {
   try {
     yield call(logout)
   } catch(e) {
-    console.log('online logout failed', e)
+    console.log('online logout failed, but do not worry - be happy', e)
   }
 
   // Hard reset all system cookies

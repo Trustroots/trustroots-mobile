@@ -19,4 +19,7 @@ export default {
   drawerText: '#000',
   drawerIcon: '#000',
   drawerContent: '#fff',
+  drawerFooter: '#fff',
+
+  version: '#888'
 }
