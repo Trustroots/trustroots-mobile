@@ -1,29 +1,37 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, Text, Image, useWindowDimensions } from 'react-native'
 
 import Logo from '../assets/logo-white.svg'
 import colors from './common/colors'
 import style from './common/styles'
 
 const App = () => {
+  const { width, height } = useWindowDimensions()
   return (
-    <View style={styles.container}>
-      <Logo height={150} width={150} />
+    <>
+      <View style={styles.container}>
+        <Image
+          style={{width, height, position: 'absolute'}}
+          source={require('../assets/background.jpg')}
+          resizeMode='cover'
+        />
 
-      <Text style={styles.title}>
-        Travellers' community
-      </Text>
-      <Text style={styles.subtitle}>
-        Sharing, hosting and getting people together.
-      </Text>
-    </View>
+        <Logo height={150} width={150} />
+
+        <Text style={styles.title}>
+          Travellers' community
+        </Text>
+        <Text style={styles.subtitle}>
+          Sharing, hosting and getting people together.
+        </Text>
+      </View>
+    </>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'darkgreen',
     alignItems: 'center',
     justifyContent: 'center'
   },
