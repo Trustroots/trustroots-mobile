@@ -28,7 +28,6 @@ const App = () => {
           contentComponent={Drawer}
           drawerIcon={() => <DrawerIcon />}
           drawerWidth={240}
-          initial
         >
           <Scene key="test" component={Empty} title="test" />
         </RouterDrawer>

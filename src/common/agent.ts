@@ -9,6 +9,8 @@ import { Results } from '../declarations.d'
 
 let cookies: any = {}
 
+export const getSession = () => cookies['connect.sid']
+
 export default (
   endpoint: 'login' | 'logout',
   data?: any,
@@ -19,16 +21,7 @@ export default (
       , url = config.host +
               Object.keys(opts)
                     .reduce((u, key) => u.replace('{' + key +'}', encodeURIComponent(opts[key])), uri)
-  console.log(url, {
-    headers: {
-      'User-Agent': config.userAgent,
-      Accept: 'application/json',
-      ...(data ? {'Content-Type': 'application/json'} : {})
-    },
-    method,
-    credentials: 'same-origin',
-    ...(data ? {body: JSON.stringify(data)} : {})
-  })
+
   return fetch(url, {
     headers: {
       'User-Agent': config.userAgent,
@@ -44,7 +37,7 @@ export default (
 
     if (response.status === 200)
       return response.json()
-    console.log(response)
+
     switch (response.status) {
       case 400: throw Results.MALFORMED
       case 401: throw Results.FORBIDDEN

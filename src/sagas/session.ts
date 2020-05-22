@@ -4,6 +4,7 @@ import * as Keychain from 'react-native-keychain'
 import { actions as formActions } from 'react-redux-form'
 
 import CookieManager from 'react-native-cookies'
+import { Results } from '../declarations.d'
 
 import {
   LOGIN_REQUEST,
@@ -16,6 +17,7 @@ import {
 
 import { login, logout } from '../common/api'
 import { Linking } from 'react-native'
+import { getSession } from '../common/agent'
 
 function* loginFlow(username: string, password: string) {
   try {
@@ -33,6 +35,7 @@ function* loginFlow(username: string, password: string) {
     if (initial)
       Actions.jump(initial.scene, initial.props)
 
+
     // Save the validated username and password in the device's safe store
     yield Keychain.setGenericPassword(username, password)
 
@@ -40,7 +43,7 @@ function* loginFlow(username: string, password: string) {
     // yield SplashScreen.hide()
 
     // Signal our successful login!
-    yield put({type: LOGIN_SUCCESS})
+    yield put({type: LOGIN_SUCCESS, payload: getSession()})
 
     // Request and broadcast the profile information of our fresh user
     yield put({type: PROFILE, payload: user})
@@ -73,6 +76,74 @@ function* logoutFlow() {
   yield CookieManager.clearAll()
 }
 
+function* reauthenticateFlow() {
+  const session = yield select(state => state.app.session)
+  try {
+    // No session, no fun.
+    if (!session)
+      throw 'no stored session'
+
+    // Let's always assume we got a working session - predictive ux for the win!
+    const initial = yield getInitialScene()
+    setTimeout(() => {
+      Actions.reset('drawer')
+      if (initial)
+        Actions.jump(initial.scene, initial.props)
+
+      // SplashScreen.hide()
+    }, 100)
+
+    // Configure our API adapter to use the stored session & token
+    // setSession({session, token})
+
+    // Check if we still have a valid session at hand
+    // const { id } = yield getCurrentUser()
+
+    // Yep, let's restore our cookies
+    // yield syncCookies()
+
+    // Notificate all listeners that we got a valid session running
+    yield put({type: LOGIN_SUCCESS, payload: session})
+
+    // Refresh and broadcast the profile information of our
+    // yield put({type: PROFILE, payload: yield call(getCurrentProfile)})
+
+  } catch(error) {
+    // In case the login failed because the user is offline..
+    if (error === Results.CONNECTION_ERROR) {
+      // .. continue from cache and assume we got a valid session
+      yield put({type: LOGIN_SUCCESS, payload: session})
+    } else {
+      // .. or report why we failed
+      console.log('reauthentication failed', error)
+
+      // Try to pull previously stored credentials from secure store
+      const result = yield Keychain.getGenericPassword()
+
+      // If we don't find what we need, directly proceed to our welcome screen
+      if (!result || !result.username || !result.password)
+        return Actions.reset('welcome')
+
+      // Blast them through the pipe to get 'em into the store
+      const { username, password } = result
+      yield put({type: KEYCHAIN, payload: {username, password}})
+
+      // Populate our login state/form
+      yield put(formActions.change('login.username', username))
+      yield put(formActions.change('login.password', password))
+
+      // ... to finally trigger the login procedure
+      yield put({type: LOGIN_REQUEST})
+    }
+  }
+
+  // Wait for our reauthentication either fail or succeed
+  const { type } = yield take([LOGIN_SUCCESS, LOGIN_ERROR])
+  if (type === LOGIN_ERROR) {
+    // yield SplashScreen.hide()
+    yield Actions.reset('welcome')
+  }
+}
 function* getInitialScene() {
   try {
     const url = yield Linking.getInitialURL()
@@ -85,7 +156,7 @@ export default function* loginSaga() {
   yield take('persist/REHYDRATE')
 
   // Water our store with previously stored session and credentials
-  // yield fork(reauthenticateFlow)
+  yield fork(reauthenticateFlow)
 
   while (true) {
     // Wait until we get a login request
