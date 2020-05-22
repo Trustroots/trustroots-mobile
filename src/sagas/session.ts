@@ -15,7 +15,7 @@ import {
   PROFILE
 } from '../common/constants'
 
-import { login, logout } from '../common/api'
+import { login, logout, messageCount } from '../common/api'
 import { Linking } from 'react-native'
 import { getSession, setSession } from '../common/agent'
 
@@ -95,11 +95,8 @@ function* reauthenticateFlow() {
     // Configure our API adapter to use the stored session & token
     setSession(session)
 
-    // Check if we still have a valid session at hand
-    // const { id } = yield getCurrentUser()
-
-    // Yep, let's restore our cookies
-    // yield syncCookies()
+    // Make a random request to see if we still have a valid session at hand
+    yield messageCount()
 
     // Notify all listeners that we got a valid session running
     yield put({type: LOGIN_SUCCESS, payload: session})

@@ -55,3 +55,7 @@ export type User = {
   // In case the login fails
   message: string
 }
+
+export type MessageCount = {
+  unread: number
+}

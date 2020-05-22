@@ -9,6 +9,7 @@ export default {
 
   endpoints: {
     login: {uri: '/api/auth/signin', method: 'POST'},
-    logout: {uri: '/api/auth/signout', method: 'GET'}
+    logout: {uri: '/api/auth/signout', method: 'GET'},
+    messageCount: {uri: '/api/messages-count', method: 'GET'}
   }
 }

@@ -25,12 +25,13 @@ export const setSession = async (session: string) =>
     path: '/',
     version: '1',
     domain: 'www.trustroots.org',
+    origin: 'www.trustroots.org',
     expiration: '2030-01-01T00:00:00.00-00:00'
   })
 )
 
 export default (
-  endpoint: 'login' | 'logout',
+  endpoint: 'login' | 'logout' | 'messageCount',
   data?: any,
   options?: any
 ): Promise<any> => {
@@ -55,7 +56,7 @@ export default (
 
     if (response.status === 200)
       return response.json()
-
+    console.log(response)
     switch (response.status) {
       case 400: throw Results.MALFORMED
       case 401: throw Results.FORBIDDEN
