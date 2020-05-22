@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, Text, Image, useWindowDimensions } from 'react-native'
+import { Actions } from 'react-native-router-flux'
 
 import Logo from '../../assets/logo-white.svg'
 import colors from '../common/colors'
@@ -35,7 +36,7 @@ const Welcome = () => {
         label="Login"
         width={200}
         transparent
-        onPress={() => null}
+        onPress={() => Actions.push('login')}
       />
     </View>
   )
