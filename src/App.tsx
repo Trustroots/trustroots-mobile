@@ -26,8 +26,18 @@ const App = () => {
           Sharing, hosting and getting people together.
         </Text>
 
-        <Button label="Join Trustroots now" />
-        <Button label="Login" transparent />
+        <Button
+          label="Join Trustroots now"
+          width={200}
+          onPress={() => null}
+        />
+
+        <Button
+          label="Login"
+          width={200}
+          transparent
+          onPress={() => null}
+        />
       </View>
     </>
   )

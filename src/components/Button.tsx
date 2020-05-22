@@ -1,29 +1,42 @@
 import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import colors from '../common/colors'
 
 type Props = {
   label: string,
-  transparent?: boolean
+  transparent?: boolean,
+  width?: number,
+  onPress: () => void
 }
 
-const Button = ({label, transparent}: Props) => {
+const Button = ({label, transparent, onPress, width}: Props) => {
   return (
-    <View style={transparent ? styles.transparent : styles.normal}>
+    <TouchableOpacity
+      style={{
+        ...(transparent ? styles.transparent : styles.normal),
+        ...(width ? {width} : {})
+      }}
+      onPress={onPress}
+    >
       <Text style={transparent ? styles.transparentText : styles.normalText}>
         {label}
       </Text>
-    </View>
+    </TouchableOpacity>
   )
+}
+
+const buttonStyle = {
+  marginTop: 20,
+  paddingTop: 12,
+  paddingBottom: 12,
+  paddingLeft: 24,
+  paddingRight: 24,
 }
 
 const styles = StyleSheet.create({
   normal: {
-    marginTop: 20,
-    paddingTop: 12,
-    paddingBottom: 12,
-    paddingLeft: 24,
-    paddingRight: 24,
+    ...buttonStyle,
+    alignItems: 'center',
     backgroundColor: colors.button
   },
 
@@ -32,11 +45,8 @@ const styles = StyleSheet.create({
   },
 
   transparent: {
-    marginTop: 20,
-    paddingTop: 12,
-    paddingBottom: 12,
-    paddingLeft: 24,
-    paddingRight: 24,
+    ...buttonStyle,
+    alignItems: 'center',
     backgroundColor: 'transparent',
     borderWidth: 1,
     borderColor: colors.foreground
