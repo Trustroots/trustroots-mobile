@@ -89,11 +89,10 @@ const Login = () => {
 
         <ButtonRow
           label="Login"
-          text="Forgot?"
+          text={authenticating !== false ? 'Forgot?' : 'Forgot? Recover your password!'}
           width={100}
           onButtonPress={() => {
             Keyboard.dismiss()
-            toastRef.current.show('Trying to log you in..', 3000)
             dispatch({type: LOGIN_REQUEST})
           }}
           onTextPress={() => null}
@@ -109,6 +108,7 @@ const Login = () => {
           text="Back home"
           transparent
         />
+
         <Toast ref={toastRef} />
       </KeyboardAvoidingView>
     </SafeAreaView>
