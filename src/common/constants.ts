@@ -11,3 +11,6 @@ export const LOGIN_ERROR = '❌ LOGIN_ERROR'
 export const LOGOUT = '👋 LOGOUT'
 
 export const PROFILE = '👤 PROFILE'
+
+export const MESSAGE_COUNT_REQUEST = '🔢 MESSAGE_COUNT_REQUEST'
+export const MESSAGE_COUNT_SUCCESS = '✅ MESSAGE_COUNT_SUCCESS'

@@ -12,7 +12,8 @@ import {
   LOGIN_ERROR,
   LOGOUT,
   KEYCHAIN,
-  PROFILE
+  PROFILE,
+  MESSAGE_COUNT_SUCCESS
 } from '../common/constants'
 
 import { login, logout, messageCount } from '../common/api'
@@ -96,7 +97,8 @@ function* reauthenticateFlow() {
     setSession(session)
 
     // Make a random request to see if we still have a valid session at hand
-    yield messageCount()
+    const messages = yield messageCount()
+    yield put({type: MESSAGE_COUNT_SUCCESS, payload: messages})
 
     // Notify all listeners that we got a valid session running
     yield put({type: LOGIN_SUCCESS, payload: session})

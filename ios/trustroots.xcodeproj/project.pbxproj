@@ -32,6 +32,7 @@
 		60D3A3D0791917E6FDC39366 /* Pods-trustroots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trustroots.release.xcconfig"; path = "Target Support Files/Pods-trustroots/Pods-trustroots.release.xcconfig"; sourceTree = "<group>"; };
 		736338434FDDD1951E5DD7D0 /* Pods-trustroots-trustrootsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trustroots-trustrootsTests.release.xcconfig"; path = "Target Support Files/Pods-trustroots-trustrootsTests/Pods-trustroots-trustrootsTests.release.xcconfig"; sourceTree = "<group>"; };
 		7AA7C26956FD9F778584BF8F /* Pods-trustroots-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trustroots-tvOS.release.xcconfig"; path = "Target Support Files/Pods-trustroots-tvOS/Pods-trustroots-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		956114D424788703002B0FF7 /* Trustroots.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Trustroots.entitlements; path = trustroots/Trustroots.entitlements; sourceTree = "<group>"; };
 		A3599D39653C32BC8D2B4ECF /* libPods-trustroots-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-trustroots-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A503DB4C197C56E3F26BF52B /* Pods-trustroots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trustroots.debug.xcconfig"; path = "Target Support Files/Pods-trustroots/Pods-trustroots.debug.xcconfig"; sourceTree = "<group>"; };
 		AF7B8FE2C75AD7E562B95353 /* Pods-trustroots-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trustroots-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-trustroots-tvOSTests/Pods-trustroots-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -73,6 +74,7 @@
 		13B07FAE1A68108700A75B9A /* trustroots */ = {
 			isa = PBXGroup;
 			children = (
+				956114D424788703002B0FF7 /* Trustroots.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -347,6 +349,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = trustroots/Trustroots.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = PJ4FY326KF;
 				ENABLE_BITCODE = NO;
@@ -376,6 +379,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = trustroots/Trustroots.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = PJ4FY326KF;
 				INFOPLIST_FILE = trustroots/Info.plist;

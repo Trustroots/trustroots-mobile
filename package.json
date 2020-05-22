@@ -11,9 +11,11 @@
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.10.3",
+    "@react-native-community/push-notification-ios": "^1.2.0",
     "react": "16.11.0",
     "react-dom": "^16.13.1",
     "react-native": "0.62.2",
+    "react-native-android-badge": "^0.4.3",
     "react-native-cookies": "^3.3.0",
     "react-native-device-info": "^5.5.8",
     "react-native-easy-toast": "^1.2.0",

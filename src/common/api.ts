@@ -7,5 +7,5 @@ export const login = (username: string, password: string): Promise<User> =>
 export const logout = (): Promise<void> =>
   agent('logout')
 
-export const messageCount = (): Promise<MessageCount> =>
-  agent('messageCount')
+export const messageCount = async (): Promise<number> =>
+  (await agent('messageCount') as MessageCount).unread
