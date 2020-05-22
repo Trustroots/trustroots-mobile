@@ -1,16 +1,16 @@
 import React from 'react'
-import { Router, Stack, Scene } from 'react-native-router-flux'
+import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
 
-import Welcome from './scenes/Welcome'
+import Router from './scenes/Router'
+import { store, persistor } from './common/store'
 
-const App = () => {
-  return (
-    <Router>
-      <Stack hideNavBar key="root">
-        <Scene key="welcome" component={Welcome} title="Welcome" />
-      </Stack>
-    </Router>
-  )
+export default class App extends React.Component {
+  render() {
+    return <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <Router />
+      </PersistGate>
+    </Provider>
+  }
 }
-
-export default App
