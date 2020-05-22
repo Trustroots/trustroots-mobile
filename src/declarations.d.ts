@@ -4,7 +4,7 @@ declare module "*.svg" {
   export default content;
 }
 
-declare enum Results {
+export enum Results {
   MALFORMED,
   UNAUTHORIZED,
   FORBIDDEN,
@@ -13,7 +13,7 @@ declare enum Results {
   NOT_FOUND
 }
 
-declare type User = {
+export type User = {
   emailTemporary: string,
   tagline: string,
   description: string,

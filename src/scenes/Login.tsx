@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, Platform, View, Text, StatusBar, SafeAreaView, KeyboardAvoidingView, TouchableOpacity } from 'react-native'
+import { useDispatch } from 'react-redux'
 
 import BackButton from '../components/BackButton'
 import Background from '../components/Background'
@@ -9,6 +10,7 @@ import { Form } from 'react-redux-form/native'
 import LoginTextInput from '../components/LoginTextInput'
 import colors from '../common/colors'
 import { Actions } from 'react-native-router-flux'
+import { LOGIN_REQUEST } from '../common/constants'
 
 type ButtonRowProps = {
   label: string,
@@ -46,6 +48,7 @@ const ButtonRow = ({label, width, text, transparent, onButtonPress, onTextPress,
   </View>
 
 const Login = () => {
+  const dispatch = useDispatch()
   return (
     <SafeAreaView style={styles.container} testID="login.scene">
       <StatusBar barStyle='light-content' animated />
@@ -61,7 +64,7 @@ const Login = () => {
           <LoginTextInput
             icon="account"
             placeholder="Email or username"
-            model=".email"
+            model=".username"
           />
 
           <LoginTextInput
@@ -76,7 +79,7 @@ const Login = () => {
           label="Login"
           text="Forgot?"
           width={100}
-          onButtonPress={() => null}
+          onButtonPress={() => dispatch({type: LOGIN_REQUEST})}
           onTextPress={() => null}
         />
 
