@@ -3,3 +3,12 @@ declare module "*.svg" {
   const content: React.FC<SvgProps>;
   export default content;
 }
+
+declare enum Results {
+  MALFORMED,
+  UNAUTHORIZED,
+  FORBIDDEN,
+  CONNECTION_ERROR,
+  SERVER_ERROR,
+  NOT_FOUND
+}
