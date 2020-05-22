@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, StyleSheet, Text } from 'react-native'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { isIphoneX } from 'react-native-iphone-x-helper'
 
 // @ts-ignore
@@ -13,6 +13,7 @@ import Version from './Version'
 
 export default () => {
   const dispatch = useDispatch()
+      , {firstName, lastName, username} = useSelector(state => state.profile, shallowEqual)
       , name = 'Test name'
 
   return (
@@ -20,7 +21,7 @@ export default () => {
       <View style={styles.header}>
         <Logo width={100} height={100} />
         <Text style={styles.username} testID="drawer.user">
-          {name}
+          {firstName} {lastName} ({username})
         </Text>
       </View>
       <View style={styles.content}>

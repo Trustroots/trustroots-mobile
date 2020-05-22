@@ -14,7 +14,8 @@ const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
   whitelist: [
-    'app'
+    'app',
+    'profile'
   ]
 }
 
