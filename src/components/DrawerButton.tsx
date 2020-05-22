@@ -6,7 +6,10 @@ import colors from '../common/colors'
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingTop: 5,
+    paddingBottom: 5,
     marginTop: 5,
     flexDirection: 'row',
     justifyContent: 'center'

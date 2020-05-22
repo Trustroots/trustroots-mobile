@@ -10,17 +10,17 @@ import colors from '../common/colors'
 import { LOGOUT } from '../common/constants'
 import DrawerButton from './DrawerButton'
 import Version from './Version'
+import SocialButton from './SocialButton'
 
 export default () => {
   const dispatch = useDispatch()
       , {firstName, lastName, username} = useSelector(state => state.profile, shallowEqual)
-      , name = 'Test name'
 
   return (
     <View style={styles.container} testID="drawer">
       <View style={styles.header}>
         <Logo width={100} height={100} />
-        <Text style={styles.username} testID="drawer.user">
+        <Text style={styles.username} testID="drawer.user" adjustsFontSizeToFit>
           {firstName} {lastName} ({username})
         </Text>
       </View>
@@ -30,8 +30,30 @@ export default () => {
           icon="exit-to-app"
           label="Logout"
         />
+
+        <View style={styles.spacer} />
       </View>
       <View style={styles.footer}>
+        <View style={styles.separator}>
+          <Text style={styles.separatorText}>
+            Connect with Trustroots!
+          </Text>
+        </View>
+        <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+          <SocialButton
+            type="twitter"
+            url="https://twitter.com/trustroots"
+          />
+          <SocialButton
+            type="instagram"
+            url="https://www.instagram.com/trustroots_org"
+          />
+          <SocialButton
+            type="facebook"
+            url="https://www.facebook.com/trustroots.org"
+          />
+        </View>
+
         <Version />
       </View>
     </View>
@@ -62,8 +84,19 @@ const styles = StyleSheet.create({
   },
   footer: {
     backgroundColor: colors.drawerFooter,
-    height: 20,
+    height: 100,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  spacer: {
+    height: 20
+  },
+  separator: {
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  separatorText: {
+    fontSize: 12,
+    color: colors.drawerGray
   }
 })

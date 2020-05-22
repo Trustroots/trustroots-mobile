@@ -17,6 +17,8 @@ export default {
   drawerHighlight: '#12B591',
   drawerUser: '#fff',
   drawerText: '#000',
+  drawerGray: '#888',
+  drawerSocialIcon: '#888',
   drawerIcon: '#000',
   drawerContent: '#fff',
   drawerFooter: '#fff',
