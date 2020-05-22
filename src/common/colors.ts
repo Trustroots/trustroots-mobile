@@ -7,4 +7,8 @@ export default {
 
   button: '#fff',
   buttonText: '#12B591',
+
+  inputText: '#000',
+  inputIcon: '#12B591',
+  inputPlaceholder: '#555'
 }

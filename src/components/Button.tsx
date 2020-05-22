@@ -28,7 +28,6 @@ const Button = ({label, transparent, onPress, width, small}: Props) => {
 }
 
 const buttonStyle = {
-  marginTop: 20,
   paddingTop: 12,
   paddingBottom: 12,
   paddingLeft: 24,
@@ -37,7 +36,6 @@ const buttonStyle = {
 }
 
 const buttonStyleSmall = {
-  marginTop: 10,
   paddingTop: 8,
   paddingBottom: 8,
   paddingLeft: 16,
