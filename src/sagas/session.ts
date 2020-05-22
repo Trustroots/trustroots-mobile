@@ -17,7 +17,7 @@ import {
 
 import { login, logout } from '../common/api'
 import { Linking } from 'react-native'
-import { getSession } from '../common/agent'
+import { getSession, setSession } from '../common/agent'
 
 function* loginFlow(username: string, password: string) {
   try {
@@ -34,7 +34,6 @@ function* loginFlow(username: string, password: string) {
     const initial = yield getInitialScene()
     if (initial)
       Actions.jump(initial.scene, initial.props)
-
 
     // Save the validated username and password in the device's safe store
     yield Keychain.setGenericPassword(username, password)
@@ -94,7 +93,7 @@ function* reauthenticateFlow() {
     }, 100)
 
     // Configure our API adapter to use the stored session & token
-    // setSession({session, token})
+    setSession(session)
 
     // Check if we still have a valid session at hand
     // const { id } = yield getCurrentUser()
@@ -102,7 +101,7 @@ function* reauthenticateFlow() {
     // Yep, let's restore our cookies
     // yield syncCookies()
 
-    // Notificate all listeners that we got a valid session running
+    // Notify all listeners that we got a valid session running
     yield put({type: LOGIN_SUCCESS, payload: session})
 
     // Refresh and broadcast the profile information of our
