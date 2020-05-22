@@ -1,21 +1,17 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image, useWindowDimensions } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 
 import Logo from '../../assets/logo-white.svg'
 import colors from '../common/colors'
 import style from '../common/styles'
 import Button from '../components/Button'
+import Background from '../components/Background'
 
 const Welcome = () => {
-  const { width, height } = useWindowDimensions()
   return (
     <View style={styles.container}>
-      <Image
-        style={{width, height, position: 'absolute'}}
-        source={require('../../assets/background.jpg')}
-        resizeMode='cover'
-      />
+      <Background image={require('../../assets/background.jpg')} />
 
       <Logo height={150} width={150} />
 
