@@ -16,7 +16,7 @@ import {
   MESSAGE_COUNT_SUCCESS
 } from '../common/constants'
 
-import { login, logout, messageCount } from '../common/api'
+import { login, logout, messagesCount } from '../common/api'
 import { Linking } from 'react-native'
 import { getSession, setSession } from '../common/agent'
 
@@ -97,7 +97,7 @@ function* reauthenticateFlow() {
     setSession(session)
 
     // Make a random request to see if we still have a valid session at hand
-    const messages = yield messageCount()
+    const messages = yield messagesCount()
     yield put({type: MESSAGE_COUNT_SUCCESS, payload: messages})
 
     // Notify all listeners that we got a valid session running

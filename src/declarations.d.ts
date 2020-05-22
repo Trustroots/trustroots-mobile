@@ -56,6 +56,28 @@ export type User = {
   message: string
 }
 
-export type MessageCount = {
+export type MessagesCount = {
   unread: number
 }
+
+export type UserReference = {
+  avatarSource: string,
+  avatarUploaded: boolean,
+  _id: string,
+  emailHash: string
+  displayName: string
+  username: string
+  additionalProvidersData: any
+  updated: string
+}
+
+export type Messages = {
+  read: boolean,
+  _id: string,
+  message: {
+    _id: string,
+    excerpt: string,
+  },
+  userTo: UserReference,
+  userFrom: UserReference
+}[]
