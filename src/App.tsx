@@ -8,7 +8,8 @@ import { store, persistor } from './common/store'
 
 YellowBox.ignoreWarnings([
   'Warning: componentWillReceiveProps',
-  'Animated: `useNativeDriver`'
+  'Animated: `useNativeDriver`',
+  'Require cycle: node_modules/react-redux-form'
 ])
 
 export default class App extends React.Component {
