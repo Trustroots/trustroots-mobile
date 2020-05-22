@@ -2,6 +2,9 @@ export default {
   background: '#12B591',
   foreground: '#fff',
 
+  navigationTabInactive: '#ccc',
+  navigationTabActive: '#12B591',
+
   text: '#333',
   link: '#cd771b',
 

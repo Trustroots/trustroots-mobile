@@ -1,5 +1,7 @@
 import React from 'react'
-import { Router, Stack, Scene, Drawer as RouterDrawer } from 'react-native-router-flux'
+import { Router, Stack, Scene, Drawer as RouterDrawer, Tabs } from 'react-native-router-flux'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { withBadge } from 'react-native-elements'
 
 import Drawer from '../components/Drawer'
 import DrawerIcon from '../components/DrawerIcon'
@@ -9,6 +11,23 @@ import Login from './Login'
 import Empty from './Empty'
 
 import colors from '../common/colors'
+import MessagesTabIcon from '../components/MessagesTabIcon'
+
+const icon = (name: string, size: number = 32, color?: string, badge?: number) => ({focused}) => {
+  const Component = badge ? withBadge(badge)(Icon) : Icon
+  return (
+    <Component
+      testID={`navigation.${name}`}
+      name={name}
+      size={size || 32}
+      style={{marginTop: 3, color:
+        color ? color :
+        focused ? colors.navigationTabActive :
+        colors.navigationTabInactive
+      }}
+    />
+  )
+}
 
 const App = () => {
   return (
@@ -29,7 +48,25 @@ const App = () => {
           drawerIcon={() => <DrawerIcon />}
           drawerWidth={240}
         >
-          <Scene key="test" component={Empty} title="test" />
+          <Tabs
+            key="main"
+            showLabel={false}
+            activeTintColor="#D7CCC8"
+            inactiveTintColor="#9E837A"
+          >
+            <Scene
+              icon={MessagesTabIcon}
+              key="messages"
+              title="Messages"
+              component={Empty}
+            />
+            <Scene
+              key="text"
+              title="Text"
+              component={Empty}
+              icon={icon('map-marker')}
+            />
+          </Tabs>
         </RouterDrawer>
       </Stack>
     </Router>

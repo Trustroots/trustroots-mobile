@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { View, StyleSheet, TouchableOpacity, Linking } from 'react-native'
+import { StyleSheet, TouchableOpacity, Linking } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import colors from '../common/colors'
