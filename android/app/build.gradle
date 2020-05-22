@@ -129,7 +129,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.trustroots"
+        applicationId "org.trustroots"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

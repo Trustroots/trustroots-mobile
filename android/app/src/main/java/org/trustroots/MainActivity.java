@@ -1,4 +1,4 @@
-package com.trustroots;
+package org.trustroots;
 
 import com.facebook.react.ReactActivity;
 
