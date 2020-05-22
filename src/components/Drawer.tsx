@@ -1,11 +1,37 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { View, StyleSheet, Text } from 'react-native'
-import colors from '../common/colors'
+import { useDispatch } from 'react-redux'
 import { isIphoneX } from 'react-native-iphone-x-helper'
 
+import colors from '../common/colors'
+import { LOGOUT } from '../common/constants'
 import DrawerButton from './DrawerButton'
-
 import Version from './Version'
+
+export default () => {
+  const dispatch = useDispatch()
+      , name = 'Test name'
+
+  return (
+    <View style={styles.container} testID="drawer">
+      <View style={styles.header}>
+        <Text style={styles.username} testID="drawer.user">
+          {name}
+        </Text>
+      </View>
+      <View style={styles.content}>
+        <DrawerButton
+          onPress={() => dispatch({type: LOGOUT})}
+          icon="exit-to-app"
+          label="Logout"
+        />
+      </View>
+      <View style={styles.footer}>
+        <Version />
+      </View>
+    </View>
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -35,34 +61,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   }
 })
-
-type Props = {
-  profile: any
-  actions: any
-}
-
-export default class Drawer extends Component<Props> {
-  render() {
-    const name = 'Test name'
-
-    return (
-      <View style={styles.container} testID="drawer">
-        <View style={styles.header}>
-          <Text style={styles.username} testID="drawer.user">
-            {name}
-          </Text>
-        </View>
-        <View style={styles.content}>
-          <DrawerButton
-            onPress={() => false}
-            icon="exit-to-app"
-            label="drawer.logout"
-          />
-        </View>
-        <View style={styles.footer}>
-          <Version />
-        </View>
-      </View>
-    )
-  }
-}

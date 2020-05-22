@@ -24,9 +24,9 @@ function* loginFlow(username: string, password: string) {
 
     // Here we go, login the user
     const user = yield call(login, username, password)
-    console.log(user)
+
     // All good, let's proceed to main
-    Actions.reset('welcome')
+    Actions.replace('drawer')
 
     // .. or to another scene if we got a deep link incoming
     const initial = yield getInitialScene()
