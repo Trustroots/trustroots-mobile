@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, Text, StatusBar } from 'react-native'
 
 import BackButton from '../components/BackButton'
 import Background from '../components/Background'
@@ -8,6 +8,7 @@ import Background from '../components/Background'
 const Login = () => {
   return (
     <View style={styles.container}>
+      <StatusBar barStyle='light-content' animated />
       <Background image={require('../../assets/background.nordic.jpg')} />
 
       <BackButton />

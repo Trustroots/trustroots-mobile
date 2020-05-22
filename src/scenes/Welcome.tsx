@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, Text, StatusBar } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 
 import Logo from '../../assets/logo-white.svg'
@@ -11,6 +11,7 @@ import Background from '../components/Background'
 const Welcome = () => {
   return (
     <View style={styles.container}>
+      <StatusBar barStyle='dark-content' animated />
       <Background image={require('../../assets/background.jpg')} />
 
       <Logo height={150} width={150} />
