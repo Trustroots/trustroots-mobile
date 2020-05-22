@@ -3,6 +3,9 @@ import { View, StyleSheet, Text } from 'react-native'
 import { useDispatch } from 'react-redux'
 import { isIphoneX } from 'react-native-iphone-x-helper'
 
+// @ts-ignore
+import Logo from '../../assets/logo-white.svg'
+
 import colors from '../common/colors'
 import { LOGOUT } from '../common/constants'
 import DrawerButton from './DrawerButton'
@@ -15,6 +18,7 @@ export default () => {
   return (
     <View style={styles.container} testID="drawer">
       <View style={styles.header}>
+        <Logo width={100} height={100} />
         <Text style={styles.username} testID="drawer.user">
           {name}
         </Text>
@@ -40,13 +44,14 @@ const styles = StyleSheet.create({
     paddingTop: isIphoneX() ? 24 : 0
   },
   header: {
-    height: 80,
+    height: 130,
     marginTop: 20,
     paddingLeft: 12,
-    alignItems: 'flex-start',
+    alignItems: 'center',
     justifyContent: 'center'
   },
   username: {
+    marginTop: 4,
     color: colors.drawerUser
   },
   content: {
