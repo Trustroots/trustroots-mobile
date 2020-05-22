@@ -6130,6 +6130,11 @@ react-native-cookies@^3.3.0:
   dependencies:
     invariant "^2.1.0"
 
+react-native-device-info@^5.5.8:
+  version "5.5.8"
+  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-5.5.8.tgz#5b971db0b550b1e53eb176c5042812429cf3a16b"
+  integrity sha512-Y4EkBXUfdpDMP+utVaQcgWnNXoqf7B6rLCS0hwpaifzhrzC7cb51vhaPBN1p4Kqym3AfqZ6VoMjorvFJLRAjqg==
+
 react-native-easy-toast@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/react-native-easy-toast/-/react-native-easy-toast-1.2.0.tgz#0f70bcb99e3306cda4800c244bfb4a67d42276ed"

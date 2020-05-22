@@ -7,6 +7,7 @@ import colors from '../common/colors'
 import style from '../common/styles'
 import Button from '../components/Button'
 import Background from '../components/Background'
+import Version from '../components/Version'
 
 const Welcome = () => {
   return (
@@ -23,11 +24,15 @@ const Welcome = () => {
         Sharing, hosting and getting people together.
       </Text>
 
+      <View style={styles.spacer} />
+
       <Button
         label="Join Trustroots now"
         width={200}
         onPress={() => null}
       />
+
+      <View style={styles.spacer} />
 
       <Button
         label="Login"
@@ -35,6 +40,8 @@ const Welcome = () => {
         transparent
         onPress={() => Actions.push('login')}
       />
+
+      <Version />
     </View>
   )
 }
@@ -63,6 +70,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: colors.foreground,
     textAlign: 'center'
+  },
+  spacer: {
+    height: 20
   }
 })
 

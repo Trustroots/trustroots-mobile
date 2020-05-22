@@ -14,8 +14,8 @@ const App = () => {
         navigationBarStyle={{backgroundColor: colors.background}}
         hideNavBar
       >
-        <Scene key="welcome" component={Welcome} title="Welcome" />
-        <Scene key="login" component={Login} title="Login" initial />
+        <Scene key="welcome" component={Welcome} title="Welcome" initial />
+        <Scene key="login" component={Login} title="Login" />
       </Stack>
     </Router>
   )

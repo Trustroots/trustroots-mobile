@@ -15,6 +15,7 @@
     "react-dom": "^16.13.1",
     "react-native": "0.62.2",
     "react-native-cookies": "^3.3.0",
+    "react-native-device-info": "^5.5.8",
     "react-native-easy-toast": "^1.2.0",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-iphone-x-helper": "^1.2.1",
