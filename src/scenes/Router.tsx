@@ -9,6 +9,7 @@ import DrawerIcon from '../components/DrawerIcon'
 import Welcome from './Welcome'
 import Login from './Login'
 import Empty from './Empty'
+import Messages from './Messages'
 
 import colors from '../common/colors'
 import MessagesTabIcon from '../components/MessagesTabIcon'
@@ -58,7 +59,7 @@ const App = () => {
               icon={MessagesTabIcon}
               key="messages"
               title="Messages"
-              component={Empty}
+              component={Messages}
             />
             <Scene
               key="text"
