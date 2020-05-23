@@ -39,7 +39,7 @@ export default () => {
             Connect with Trustroots!
           </Text>
         </View>
-        <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+        <View style={styles.social}>
           <SocialButton
             type="twitter"
             url="https://twitter.com/trustroots"
@@ -98,5 +98,9 @@ const styles = StyleSheet.create({
   separatorText: {
     fontSize: 12,
     color: colors.drawerGray
+  },
+  social: {
+    flexDirection: 'row',
+    justifyContent: 'center'
   }
 })

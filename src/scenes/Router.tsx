@@ -6,6 +6,7 @@ import { withBadge } from 'react-native-elements'
 import Drawer from '../components/Drawer'
 import DrawerIcon from '../components/DrawerIcon'
 
+import Loading from './Loading'
 import Welcome from './Welcome'
 import Login from './Login'
 import Empty from './Empty'
@@ -39,8 +40,9 @@ const App = () => {
         navigationBarStyle={{backgroundColor: colors.background}}
         hideNavBar
       >
-        <Scene key="welcome" component={Welcome} title="Welcome" initial />
-        <Scene key="login" component={Login} title="Login" />
+        <Scene key="loading" component={Loading} initial />
+        <Scene key="welcome" component={Welcome} />
+        <Scene key="login" component={Login} />
 
         <RouterDrawer
           hideNavBar
