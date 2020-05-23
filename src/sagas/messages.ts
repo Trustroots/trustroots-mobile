@@ -1,16 +1,22 @@
-import { take, call, fork } from 'redux-saga/effects'
+import { take, call, fork, put } from 'redux-saga/effects'
 
 import { Platform } from 'react-native'
 import PushNotificationIOS from '@react-native-community/push-notification-ios'
 import AndroidBadge from 'react-native-android-badge'
 
 import {
-  MESSAGES_COUNT_SUCCESS
+  MESSAGES_COUNT_SUCCESS, MESSAGES_REQUEST, MESSAGES_SUCCESS
 } from '../common/constants'
 
+import { messages } from '../common/api'
+
 export default function* conversationsSaga() {
+  // Handle messages requests
+  yield fork(messageWatcher)
+
   // Wait for actions altering the conversations unread counter
   yield fork(unreadWatcher)
+
 }
 
 // As soon as we get a fresh message count info, update the home screen badges
@@ -27,5 +33,13 @@ function* unreadWatcher() {
         AndroidBadge.setBadge,
       payload
     )
+  }
+}
+
+// Wait for message listing requests and fulfill them
+function* messageWatcher() {
+  while (true) {
+    yield take(MESSAGES_REQUEST)
+    yield put({type: MESSAGES_SUCCESS, payload: yield messages()})
   }
 }

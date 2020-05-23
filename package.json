@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-native-community/async-storage": "^1.10.3",
     "@react-native-community/push-notification-ios": "^1.2.0",
+    "@types/react-redux": "^7.1.9",
     "moment": "^2.26.0",
     "react": "16.11.0",
     "react-dom": "^16.13.1",

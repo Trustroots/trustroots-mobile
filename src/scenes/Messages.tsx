@@ -17,10 +17,12 @@ export default ({navigation}: Props) => {
       , data = []
 
   useEffect(() => {
-    pull()
-    this.didFocusListener = navigation.addListener('didFocus', pull)
+    if (navigation) {
+      pull()
+      this.didFocusListener = navigation.addListener('didFocus', pull)
+    }
     return () => this.didFocusListener.remove()
-  }, [])
+  }, [navigation])
 
   return (
     <SafeAreaView style={styles.container} testID="conversations.scene">
