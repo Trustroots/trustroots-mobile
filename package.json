@@ -29,6 +29,7 @@
     "react-native-reanimated": "^1.8.0",
     "react-native-router-flux": "^4.2.0",
     "react-native-screens": "^2.7.0",
+    "react-native-splash-screen": "^3.2.0",
     "react-native-svg": "^12.1.0",
     "react-native-vector-icons": "^6.6.0",
     "react-redux": "^7.2.0",

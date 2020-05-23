@@ -2,7 +2,7 @@ import { take, fork, call, put, select } from 'redux-saga/effects'
 import { Actions } from 'react-native-router-flux'
 import * as Keychain from 'react-native-keychain'
 import { actions as formActions } from 'react-redux-form'
-
+import SplashScreen from 'react-native-splash-screen'
 import CookieManager from 'react-native-cookies'
 import { Results } from '../declarations.d'
 
@@ -40,7 +40,7 @@ function* loginFlow(username: string, password: string) {
     yield Keychain.setGenericPassword(username, password)
 
     // If we came that far, un-hide the splash screen
-    // yield SplashScreen.hide()
+    yield SplashScreen.hide()
 
     // Signal our successful login!
     yield put({type: LOGIN_SUCCESS, payload: getSession()})
@@ -90,7 +90,7 @@ function* reauthenticateFlow() {
       if (initial)
         Actions.jump(initial.scene, initial.props)
 
-      // SplashScreen.hide()
+      SplashScreen.hide()
     }, 100)
 
     // Configure our API adapter to use the stored session & token
@@ -138,7 +138,7 @@ function* reauthenticateFlow() {
   // Wait for our reauthentication either fail or succeed
   const { type } = yield take([LOGIN_SUCCESS, LOGIN_ERROR])
   if (type === LOGIN_ERROR) {
-    // yield SplashScreen.hide()
+    yield SplashScreen.hide()
     yield Actions.reset('welcome')
   }
 }

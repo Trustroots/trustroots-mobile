@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { StyleSheet, View, Text, StatusBar } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 
@@ -8,8 +8,12 @@ import style from '../common/styles'
 import Button from '../components/Button'
 import Background from '../components/Background'
 import Version from '../components/Version'
+import SplashScreen from 'react-native-splash-screen'
 
 const Welcome = () => {
+  useEffect(() => {
+    SplashScreen.hide()
+  }, [])
   return (
     <View style={styles.container}>
       <StatusBar barStyle='dark-content' animated />
