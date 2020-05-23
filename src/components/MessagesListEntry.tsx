@@ -2,34 +2,36 @@ import React, { Component } from 'react'
 import { Actions } from 'react-native-router-flux'
 
 import CommonListEntry from './CommonListEntry'
+import { Conversation } from '../declarations.d'
 
 type Props = {
-  conversation: {member: string[]} & ConversationListEntry,
+  conversation: Conversation
   testID: string,
   isLast: boolean,
-  foodsavers: {string: User},
-  profile: Profile
 }
 
-class ConversationsItem extends Component<Props> {
+export default class ConversationsItem extends Component<Props> {
   render() {
-    const { conversation, testID, isLast, profile } = this.props
-        , { id, name, last_ts, last_message } = conversation
-
-        // , lastMessenger = member.find(member => member === last_foodsaver_id)
-        , isUnread = conversation.unread !== "0"
-        , title = name
+    const { conversation, testID, isLast } = this.props
+        , { message: {excerpt}, _id, read, userTo, userFrom, updated } = conversation
+        , user = userFrom
+        , size = 256
+        , image =
+          user.avatarSource === 'local' ? `https://www.trustroots.org/uploads-profile/${user._id}/avatar/${size}.jpg` :
+          user.avatarSource === 'facebook' ? `https://graph.facebook.com/${user.additionalProvidersData.facebook.id}/picture/?width=${size}&height=${size}` :
+          user.avatarSource === 'gravatar' ? `https://gravatar.com/avatar/${user.emailHash}?s=${size}` :
+          null
 
     return <CommonListEntry
-      pictures={[]}
-      onPress={() => Actions.jump('conversation', {conversationId: id})}
+      picture={image}
+      onPress={() => Actions.jump('conversation', {conversationId: _id})}
       testID={testID}
-      title={title}
-      timestamp={parseInt(last_ts)*1000}
+      title={user.displayName}
+      timestamp={Date.parse(updated)}
       subtitlePhoto={null}
-      subtitle={last_message}
+      subtitle={excerpt}
       isLast={isLast}
-      isUnread={isUnread}
+      isUnread={!read}
     />
   }
 }

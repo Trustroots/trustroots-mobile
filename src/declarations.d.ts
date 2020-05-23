@@ -72,7 +72,7 @@ export type UserReference = {
   updated: string
 }
 
-export type Messages = {
+export type Conversation = {
   read: boolean,
   _id: string,
   message: {
@@ -80,8 +80,10 @@ export type Messages = {
     excerpt: string,
   },
   userTo: UserReference,
-  userFrom: UserReference
-}[]
+  userFrom: UserReference,
+  updated: string
+}
+export type Messages = Conversation[]
 
 export type Message = {
   content: string,
@@ -91,5 +93,3 @@ export type Message = {
   userFrom: UserReference,
   created: string
 }
-
-export type Conversation = Message[]

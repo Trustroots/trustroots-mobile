@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { SafeAreaView, StyleSheet, FlatList, StatusBar, View, Text } from 'react-native'
 
 import colors from '../common/colors'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { MESSAGES_REQUEST } from '../common/constants'
-// import MessagesListEntry from '../components/MessagesListEntry'
+import { Messages } from '../declarations'
+import MessagesListEntry from '../components/MessagesListEntry'
 
 type Props = {
   navigation: any
@@ -14,7 +15,7 @@ export default ({navigation}: Props) => {
   const [refreshing, setRefreshing] = useState(false)
       , dispatch = useDispatch()
       , pull = () => dispatch({type: MESSAGES_REQUEST})
-      , data = []
+      , messages = useSelector((state: any) => state.conversations) as Messages
 
   useEffect(() => {
     if (navigation) {
@@ -27,23 +28,22 @@ export default ({navigation}: Props) => {
   return (
     <SafeAreaView style={styles.container} testID="conversations.scene">
       <StatusBar backgroundColor={colors.background} barStyle="light-content" />
-      {data.length ?
+      {messages.length ?
         <FlatList
-          keyExtractor={item => item.id.toString()}
+          keyExtractor={item => item._id}
           onRefresh={() => {
             pull()
-            setTimeout(() => setRefreshing(false), 1000)
+            setTimeout(() => setRefreshing(false), 2000)
           }}
           refreshing={refreshing}
           style={styles.list}
-          data={data}
+          data={messages}
           renderItem={({item, index}) =>
-            <View><Text>foobar</Text></View>
-            // <MessagesListEntry
-            //   conversation={item}
-            //   testID={'conversations.'+index}
-            //   isLast={index === data.length - 1}
-            // />
+            <MessagesListEntry
+              conversation={item}
+              testID={'conversations.'+index}
+              isLast={index === messages.length - 1}
+            />
           }
         />
       : <View style={{padding: 10}}>

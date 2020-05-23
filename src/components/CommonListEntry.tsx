@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react'
-import { StyleSheet, View, Text, Dimensions, TouchableOpacity, Platform } from 'react-native'
+import { StyleSheet, View, Text, Dimensions, TouchableOpacity, Image } from 'react-native'
+import FastImage from 'react-native-fast-image'
 
 import moment, { Moment } from 'moment'
 
-// import RoundedImage from './RoundedImage'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import colors from '../common/colors'
@@ -68,7 +68,7 @@ type Props = {
   testID: string
   timestamp: number | Moment,
   isUnread: boolean,
-  pictures?: string[],
+  picture: string,
   icon?: string,
   title: string,
   displayTimeAgo?: boolean
@@ -77,9 +77,9 @@ type Props = {
   subtitlePhoto?: string
 }
 
-export default class ConversationsItem extends PureComponent<Props> {
+export default class CommonListEntry extends PureComponent<Props> {
   render() {
-    const { onPress, onLongPress, testID, timestamp, icon, isUnread, pictures, title, displayTimeAgo, subtitlePhoto, isLast, subtitle } = this.props
+    const { onPress, onLongPress, testID, timestamp, icon, isUnread, picture, title, displayTimeAgo, subtitlePhoto, isLast, subtitle } = this.props
         , date = (timestamp instanceof moment ? timestamp : moment(timestamp)) as Moment
         , isToday = date.isSame(new Date(), 'day')
         , isYesterday = date.isSame(new Date(Date.now() - 24*60*60*1000), 'day')
@@ -93,13 +93,13 @@ export default class ConversationsItem extends PureComponent<Props> {
           testID={testID}
         >
           <View style={styles.images}>
-            {/* {!!pictures && pictures.slice(0, Platform.OS === 'ios' ? 4 : 2).map((picture, idx) =>
-              <RoundedImage
-                key={`${testID}.${idx}`}
-                style={pictures.length > 1 ? {width: '48%', margin: '1%'} : {width: '100%'}}
-                photo={picture}
+            {!!picture &&
+              <FastImage
+                style={{width: 64, height: 64}}
+                source={{uri: picture}}
+                resizeMode="contain"
               />
-            )} */}
+            }
             {!!icon &&
               <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                 <Icon name={icon} size={36} color={colors.background} />
