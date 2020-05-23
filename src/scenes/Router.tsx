@@ -9,7 +9,7 @@ import DrawerIcon from '../components/DrawerIcon'
 import Loading from './Loading'
 import Welcome from './Welcome'
 import Login from './Login'
-import Empty from './Empty'
+import Map from './Map'
 import Messages from './Messages'
 
 import colors from '../common/colors'
@@ -64,9 +64,9 @@ const App = () => {
               component={Messages}
             />
             <Scene
-              key="text"
-              title="Text"
-              component={Empty}
+              key="map"
+              title="Search"
+              component={Map}
               icon={icon('map-marker')}
             />
           </Tabs>

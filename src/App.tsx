@@ -6,10 +6,12 @@ import { PersistGate } from 'redux-persist/integration/react'
 import Router from './scenes/Router'
 import { store, persistor } from './common/store'
 
+// TODO: these should be kept to an *absolute* minimum and regularly reevaluated
 YellowBox.ignoreWarnings([
   'Warning: componentWillReceiveProps',
   'Animated: `useNativeDriver`',
-  'Require cycle: node_modules/react-redux-form'
+  'Require cycle: node_modules/react-redux-form',
+  'Require cycle: node_modules/react-native-maps'
 ])
 
 export default class App extends React.Component {

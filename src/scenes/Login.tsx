@@ -51,7 +51,7 @@ const ButtonRow = ({label, width, text, transparent, onButtonPress, onTextPress,
 
 const Login = () => {
   const dispatch = useDispatch()
-      , authenticating = useSelector(state => state.app.authenticating)
+      , authenticating = useSelector((state: any) => state.app.authenticating) as boolean
       , toastRef = useRef(null)
 
   useEffect(() => {
