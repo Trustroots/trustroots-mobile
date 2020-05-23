@@ -11,6 +11,8 @@ export default {
     login: {uri: '/api/auth/signin', method: 'POST'},
     logout: {uri: '/api/auth/signout', method: 'GET'},
     messagesCount: {uri: '/api/messages-count', method: 'GET'},
-    messages: {uri: '/api/messages', method: 'GET'}
+    markRead: {uri: '/api/messages-read', method: 'POST'},
+    messages: {uri: '/api/messages', method: 'GET'},
+    conversation: {uri: '/api/messages/{conversationId}', method: 'GET'}
   }
 }

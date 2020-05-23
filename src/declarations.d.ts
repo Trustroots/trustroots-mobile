@@ -52,6 +52,7 @@ export type User = {
   seen: string,
   memberIds: string[],
 
+  updated: string,
   // In case the login fails
   message: string
 }
@@ -81,3 +82,14 @@ export type Messages = {
   userTo: UserReference,
   userFrom: UserReference
 }[]
+
+export type Message = {
+  content: string,
+  read: boolean,
+  _id: string,
+  userTo: UserReference,
+  userFrom: UserReference,
+  created: string
+}
+
+export type Conversation = Message[]
