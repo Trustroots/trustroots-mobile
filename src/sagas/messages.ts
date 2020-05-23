@@ -5,7 +5,7 @@ import PushNotificationIOS from '@react-native-community/push-notification-ios'
 import AndroidBadge from 'react-native-android-badge'
 
 import {
-  MESSAGE_COUNT_SUCCESS
+  MESSAGES_COUNT_SUCCESS
 } from '../common/constants'
 
 export default function* conversationsSaga() {
@@ -17,7 +17,7 @@ export default function* conversationsSaga() {
 function* unreadWatcher() {
   while (true) {
     // Wait for all actions that could potentially alter the conversation
-    const { payload } = yield take(MESSAGE_COUNT_SUCCESS)
+    const { payload } = yield take(MESSAGES_COUNT_SUCCESS)
 
     // Set the badge count depending on the relevant bridge
     // TODO: this actually should work - but doesn't :D

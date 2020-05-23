@@ -26,5 +26,12 @@ export default {
   drawerContent: '#fff',
   drawerFooter: '#fff',
 
-  version: '#888'
+  version: '#888',
+
+  separator: '#888',
+
+  messageUnread: '#f00',
+  messagePreview: '#888',
+  messageUnreadBackground: '#ccc',
+  messageDate: '#888'
 }
