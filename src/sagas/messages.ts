@@ -40,6 +40,8 @@ function* unreadWatcher() {
 function* messageWatcher() {
   while (true) {
     yield take(MESSAGES_REQUEST)
-    yield put({type: MESSAGES_SUCCESS, payload: yield messages()})
+    try {
+      yield put({type: MESSAGES_SUCCESS, payload: yield messages()})
+    } catch(e) { /* Request error handling is happening @agent */ }
   }
 }

@@ -10,58 +10,6 @@ import colors from '../common/colors'
 
 const { width } = Dimensions.get('window')
 
-const styles = StyleSheet.create({
-  container: {
-    width,
-    height: width * 0.19 + 10,
-    flexDirection: 'row'
-  },
-  lastMessage: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start'
-  },
-  images: {
-    width: width * 0.22,
-    flexWrap: 'wrap',
-    padding: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  header: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingTop: 3
-  },
-  name: {
-    fontSize: 14,
-    fontWeight: '400'
-  },
-  date: {
-    color: colors.messageDate,
-    fontSize: 11
-  },
-  lastMessageImage: {
-    width: 18,
-    marginRight: 8
-  },
-  lastMessageText: {
-    fontSize: 11,
-    flex: 1,
-    color: colors.messagePreview
-  },
-  separator: {
-    height: 1,
-    width: width * 0.78 - 10,
-    backgroundColor: colors.separator,
-    position: 'absolute',
-    right: 0,
-    bottom: 1
-  }
-})
-
 type Props = {
   onPress: () => void
   onLongPress?: () => void
@@ -92,7 +40,7 @@ export default class CommonListEntry extends PureComponent<Props> {
           onLongPress={onLongPress}
           testID={testID}
         >
-          <View style={styles.images}>
+          <View style={styles.image}>
             {!!picture &&
               <FastImage
                 style={{width: 64, height: 64}}
@@ -152,3 +100,52 @@ export default class CommonListEntry extends PureComponent<Props> {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    width,
+    height: width * 0.19 + 10,
+    flexDirection: 'row'
+  },
+  lastMessage: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start'
+  },
+  image: {
+    width: width * 0.22,
+    padding: 10,
+  },
+  header: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingTop: 3
+  },
+  name: {
+    fontSize: 14,
+    fontWeight: '400'
+  },
+  date: {
+    color: colors.messageDate,
+    fontSize: 11
+  },
+  lastMessageImage: {
+    width: 18,
+    marginRight: 8
+  },
+  lastMessageText: {
+    fontSize: 11,
+    flex: 1,
+    color: colors.messagePreview
+  },
+  separator: {
+    height: 1,
+    width: width * 0.78 - 10,
+    backgroundColor: colors.separator,
+    position: 'absolute',
+    right: 0,
+    bottom: 1
+  }
+})

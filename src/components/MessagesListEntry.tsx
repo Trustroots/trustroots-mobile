@@ -3,6 +3,7 @@ import { Actions } from 'react-native-router-flux'
 
 import CommonListEntry from './CommonListEntry'
 import { Conversation } from '../declarations.d'
+import { userImageURL } from '../common/utils'
 
 type Props = {
   conversation: Conversation
@@ -15,12 +16,7 @@ export default class ConversationsItem extends Component<Props> {
     const { conversation, testID, isLast } = this.props
         , { message: {excerpt}, _id, read, userTo, userFrom, updated } = conversation
         , user = userFrom
-        , size = 256
-        , image =
-          user.avatarSource === 'local' ? `https://www.trustroots.org/uploads-profile/${user._id}/avatar/${size}.jpg` :
-          user.avatarSource === 'facebook' ? `https://graph.facebook.com/${user.additionalProvidersData.facebook.id}/picture/?width=${size}&height=${size}` :
-          user.avatarSource === 'gravatar' ? `https://gravatar.com/avatar/${user.emailHash}?s=${size}` :
-          null
+        , image = userImageURL(user, 256)
 
     return <CommonListEntry
       picture={image}

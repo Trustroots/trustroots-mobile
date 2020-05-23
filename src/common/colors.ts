@@ -28,10 +28,10 @@ export default {
 
   version: '#888',
 
-  separator: '#888',
+  separator: '#eee',
 
   messageUnread: '#f00',
   messagePreview: '#888',
-  messageUnreadBackground: '#ccc',
+  messageUnreadBackground: '#fefefe',
   messageDate: '#888'
 }
