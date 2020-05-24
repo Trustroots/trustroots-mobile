@@ -27,6 +27,13 @@ export default () => {
       , dispatch = useDispatch()
       , [tracking, setTracking] = useState(false)
       , offers = useSelector((state: any) => state.offers) as Offers
+      , data = offers.filter(offer => offer.location && offer.location.length == 2).map(offer => ({
+        id: offer._id,
+        location: {
+          latitude: offer.location[0],
+          longitude: offer.location[1]
+        }
+      }))
       , initialRegion = {latitude: 48, longitude: 11, ...defaultZoom}
       // , initialRegion = profile.lat && profile.lon ?
       //     {
@@ -43,7 +50,7 @@ export default () => {
     <View style={styles.container} testID="map.scene">
       <ClusteredMapView
         ref={mapRef}
-        data={offers}
+        data={data}
         style={styles.map}
 
         initialRegion={initialRegion}
