@@ -98,6 +98,6 @@ export type Offer = {
   _id: string,
   location: number[],
   status: 'maybe' | 'yes',
-  type: string
+  type: 'host' | 'meet'
 }
 export type Offers = Offer[]

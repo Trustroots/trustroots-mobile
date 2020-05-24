@@ -4,12 +4,13 @@ import ClusteredMapView from 'react-native-maps-super-cluster'
 
 import MapCluster from '../components/MapCluster'
 import MapMarker from '../components/MapMarker'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { OFFERS_REQUEST } from '../common/constants'
+import { Offers } from '../declarations'
 
 const defaultZoom = {
-        longitudeDelta: 1.1,
-        latitudeDelta: 1.1
+        longitudeDelta: 32,
+        latitudeDelta: 32
       }
 
       // markers[type].map(marker => ({
@@ -25,8 +26,8 @@ export default () => {
   const mapRef = useRef(null) as ClusteredMapView
       , dispatch = useDispatch()
       , [tracking, setTracking] = useState(false)
-      , data = []
-      , initialRegion = {longitude: 40, latitude: 10, ...defaultZoom}
+      , offers = useSelector((state: any) => state.offers) as Offers
+      , initialRegion = {latitude: 48, longitude: 11, ...defaultZoom}
       // , initialRegion = profile.lat && profile.lon ?
       //     {
       //       longitude: parseFloat(profile.lon),
@@ -42,7 +43,7 @@ export default () => {
     <View style={styles.container} testID="map.scene">
       <ClusteredMapView
         ref={mapRef}
-        data={data}
+        data={offers}
         style={styles.map}
 
         initialRegion={initialRegion}

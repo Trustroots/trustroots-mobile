@@ -10,14 +10,14 @@ export const logout = (): Promise<void> =>
 export const unreadCount = async (): Promise<number> =>
   (await agent('messagesCount') as MessagesCount).unread
 
-export const markRead = async(messageIds: string[]): Promise<void> =>
+export const markRead = async (messageIds: string[]): Promise<void> =>
   agent('markRead', {messageIds})
 
-export const messages = async(): Promise<Messages> =>
+export const messages = async (): Promise<Messages> =>
   agent('messages')
 
-export const conversation = async(conversationId: string): Promise<Conversation> =>
+export const conversation = async (conversationId: string): Promise<Conversation> =>
   agent('conversation', null, {conversationId})
 
-export const offers = async(northEastLat: number, northEastLng: number, southWestLat: number, southWestLng: number, filters: any = {}): Promise<Offers> =>
+export const offers = async (northEastLat: number, northEastLng: number, southWestLat: number, southWestLng: number, filters: any = {}): Promise<Offers> =>
   agent('offers', null, {northEastLat, northEastLng, southWestLat, southWestLng, filters: JSON.stringify(filters)})
