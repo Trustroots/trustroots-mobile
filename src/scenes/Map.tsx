@@ -1,9 +1,11 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { StyleSheet, View, Platform } from 'react-native'
 import ClusteredMapView from 'react-native-maps-super-cluster'
 
 import MapCluster from '../components/MapCluster'
 import MapMarker from '../components/MapMarker'
+import { useDispatch } from 'react-redux'
+import { OFFERS_REQUEST } from '../common/constants'
 
 const defaultZoom = {
         longitudeDelta: 1.1,
@@ -21,8 +23,8 @@ const defaultZoom = {
 
 export default () => {
   const mapRef = useRef(null) as ClusteredMapView
+      , dispatch = useDispatch()
       , [tracking, setTracking] = useState(false)
-
       , data = []
       , initialRegion = {longitude: 40, latitude: 10, ...defaultZoom}
       // , initialRegion = profile.lat && profile.lon ?
@@ -31,6 +33,10 @@ export default () => {
       //       latitude: parseFloat(profile.lat),
       //       ...defaultZoom
       //     } : config.initialMapRegion
+
+  useEffect(() => {
+    dispatch({type: OFFERS_REQUEST})
+  }, [])
 
   return (
     <View style={styles.container} testID="map.scene">
