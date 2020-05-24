@@ -15,7 +15,7 @@ export default function* conversationsSaga() {
   yield fork(messageWatcher)
 
   // Wait for actions altering the conversations unread counter
-  yield fork(unreadWatcher)
+  // yield fork(unreadWatcher)
 
 }
 

@@ -12,11 +12,21 @@ MapboxGL.setAccessToken(config.mapboxToken)
 
 const layerStyles = {
   singlePoint: {
-    circleColor: 'green',
+    circleColor: [
+      'match',
+      ['get', 'type'],
+      'meet',
+      '#59BA58',
+      'yes',
+      '#0081A1',
+      'maybe',
+      '#F2AE44',
+      '#ccc'
+    ],
     circleOpacity: 0.84,
     circleStrokeWidth: 2,
     circleStrokeColor: 'white',
-    circleRadius: 5,
+    circleRadius: 10,
     circlePitchAlignment: 'map',
   },
 
@@ -53,7 +63,10 @@ export default () => {
       , shape = featureCollection(
           offers
           .filter(offer => offer.location && offer.location.length == 2)
-          .map(offer => point([offer.location[1], offer.location[0]], {_id: offer._id}))
+          .map(offer => point([offer.location[1], offer.location[0]], {
+            id: offer._id,
+            type: offer.type === 'meet' ? 'meet' : offer.status
+          }))
         )
 
   useEffect(() => {
@@ -75,6 +88,7 @@ export default () => {
             shape={shape}>
             <MapboxGL.SymbolLayer
               id="pointCount"
+              // @ts-ignore
               style={layerStyles.clusterCount}
             />
 
@@ -82,12 +96,14 @@ export default () => {
               id="clusteredPoints"
               belowLayerID="pointCount"
               filter={['has', 'point_count']}
+              // @ts-ignore
               style={layerStyles.clusteredPoints}
             />
 
             <MapboxGL.CircleLayer
               id="singlePoint"
               filter={['!', ['has', 'point_count']]}
+              // @ts-ignore
               style={layerStyles.singlePoint}
             />
           </MapboxGL.ShapeSource>
