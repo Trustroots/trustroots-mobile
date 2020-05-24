@@ -5,5 +5,5 @@ export default {
       height: 1
     },
     textShadowColor: 'rgba(0, 0, 0, 0.6)'
-  }
+  },
 }

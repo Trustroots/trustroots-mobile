@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { StyleSheet, View, Text, Dimensions, TouchableOpacity, Image } from 'react-native'
+import { StyleSheet, View, Text, Dimensions, TouchableOpacity } from 'react-native'
 import FastImage from 'react-native-fast-image'
 
 import moment, { Moment } from 'moment'

@@ -16,7 +16,8 @@ const persistConfig = {
   whitelist: [
     'app',
     'profile',
-    'conversations'
+    'conversations',
+    'offers'
   ]
 }
 

@@ -1,46 +1,60 @@
-import React, { useRef, useState, useEffect } from 'react'
-import { StyleSheet, View, Platform } from 'react-native'
-import ClusteredMapView from 'react-native-maps-super-cluster'
+import React, { useEffect } from 'react'
+import { StyleSheet, View } from 'react-native'
+import MapboxGL from '@react-native-mapbox-gl/maps'
+import { featureCollection, point } from '@turf/helpers'
 
-import MapCluster from '../components/MapCluster'
-import MapMarker from '../components/MapMarker'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { OFFERS_REQUEST } from '../common/constants'
 import { Offers } from '../declarations'
 
-const defaultZoom = {
-        longitudeDelta: 32,
-        latitudeDelta: 32
-      }
+import config from '../common/config'
+MapboxGL.setAccessToken(config.mapboxToken)
 
-      // markers[type].map(marker => ({
-      //   type,
-      //   id: marker.id,
-      //   location: {
-      //     latitude: parseFloat(marker.lat),
-      //     longitude: parseFloat(marker.lon)
-      //   }
-      // }))
+const layerStyles = {
+  singlePoint: {
+    circleColor: 'green',
+    circleOpacity: 0.84,
+    circleStrokeWidth: 2,
+    circleStrokeColor: 'white',
+    circleRadius: 5,
+    circlePitchAlignment: 'map',
+  },
+
+  clusteredPoints: {
+    circlePitchAlignment: 'map',
+
+    circleColor: [
+      'step',
+      ['get', 'point_count'],
+      '#51bbd6',
+      100,
+      '#f1f075',
+      750,
+      '#f28cb1',
+    ],
+
+    circleRadius: ['step', ['get', 'point_count'], 20, 100, 25, 750, 30],
+
+    circleOpacity: 0.84,
+    circleStrokeWidth: 2,
+    circleStrokeColor: 'white',
+  },
+
+  clusterCount: {
+    textField: '{point_count}',
+    textSize: 12,
+    textPitchAlignment: 'map',
+  },
+}
 
 export default () => {
-  const mapRef = useRef(null) as ClusteredMapView
-      , dispatch = useDispatch()
-      , [tracking, setTracking] = useState(false)
-      , offers = useSelector((state: any) => state.offers) as Offers
-      , data = offers.filter(offer => offer.location && offer.location.length == 2).map(offer => ({
-        id: offer._id,
-        location: {
-          latitude: offer.location[0],
-          longitude: offer.location[1]
-        }
-      }))
-      , initialRegion = {latitude: 48, longitude: 11, ...defaultZoom}
-      // , initialRegion = profile.lat && profile.lon ?
-      //     {
-      //       longitude: parseFloat(profile.lon),
-      //       latitude: parseFloat(profile.lat),
-      //       ...defaultZoom
-      //     } : config.initialMapRegion
+  const dispatch = useDispatch()
+      , offers = useSelector((state: any) => state.offers, shallowEqual) as Offers
+      , shape = featureCollection(
+          offers
+          .filter(offer => offer.location && offer.location.length == 2)
+          .map(offer => point([offer.location[1], offer.location[0]], {_id: offer._id}))
+        )
 
   useEffect(() => {
     dispatch({type: OFFERS_REQUEST})
@@ -48,45 +62,36 @@ export default () => {
 
   return (
     <View style={styles.container} testID="map.scene">
-      <ClusteredMapView
-        ref={mapRef}
-        data={data}
-        style={styles.map}
-
-        initialRegion={initialRegion}
-
-        radius={40}
-
-        onUserLocationChange={async ({coordinate}) => {
-          if (Platform.OS === 'ios')
-            return
-
-          const camera = await this.refs.map.getCamera()
-          camera.center = {...coordinate}
-          mapRef.current.animateCamera(camera, {duration: 300})
-        }}
-
-        edgePadding={{left: 40, top: 40, right: 40, bottom: 40}}
-
-        showsUserLocation={tracking}
-        animateClusters={false}
-
-        renderMarker={marker =>
-          <MapMarker
-            key={'marker.'+marker.id}
-            marker={marker}
-            onPress={() => false}
+      <MapboxGL.MapView style={styles.map}>
+      <MapboxGL.Camera
+            zoomLevel={6}
+            centerCoordinate={[11, 48]}
           />
-        }
 
-        renderCluster={(cluster, onPress) =>
-          <MapCluster
-            key={'cluster.'+cluster.id}
-            cluster={cluster}
-            onPress={onPress}
-          />
-        }
-      />
+          <MapboxGL.ShapeSource
+            id="earthquakes"
+            cluster
+            clusterRadius={50}
+            shape={shape}>
+            <MapboxGL.SymbolLayer
+              id="pointCount"
+              style={layerStyles.clusterCount}
+            />
+
+            <MapboxGL.CircleLayer
+              id="clusteredPoints"
+              belowLayerID="pointCount"
+              filter={['has', 'point_count']}
+              style={layerStyles.clusteredPoints}
+            />
+
+            <MapboxGL.CircleLayer
+              id="singlePoint"
+              filter={['!', ['has', 'point_count']]}
+              style={layerStyles.singlePoint}
+            />
+          </MapboxGL.ShapeSource>
+      </MapboxGL.MapView>
     </View>
   )
 }

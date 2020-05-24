@@ -11,10 +11,11 @@ import { LOGOUT } from '../common/constants'
 import DrawerButton from './DrawerButton'
 import Version from './Version'
 import SocialButton from './SocialButton'
+import { User } from '../declarations'
 
 export default () => {
   const dispatch = useDispatch()
-      , {firstName, lastName, username} = useSelector(state => state.profile, shallowEqual)
+      , {firstName, lastName, username} = useSelector((state: any) => state.profile, shallowEqual) as User
 
   return (
     <View style={styles.container} testID="drawer">

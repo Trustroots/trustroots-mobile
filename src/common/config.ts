@@ -7,6 +7,8 @@ export default {
 
   userAgent: 'Mozilla/5.0 (compatible; TrustrootsReactNative/1.0; +https://github.com/rastapasta/trustroots)',
 
+  mapboxToken: 'pk.eyJ1IjoicmFzdGFwYXN0YSIsImEiOiJja2FsaHA4Y2YwdTR2MnRwNjNhejl3NnowIn0.pfozkRdoZ3Ks_q7ynpZJ7w',
+
   endpoints: {
     login: {uri: '/api/auth/signin', method: 'POST'},
     logout: {uri: '/api/auth/signout', method: 'GET'},
