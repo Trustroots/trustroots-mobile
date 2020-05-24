@@ -93,3 +93,11 @@ export type Message = {
   userFrom: UserReference,
   created: string
 }
+
+export type Offer = {
+  _id: string,
+  location: number[],
+  status: 'maybe' | 'yes',
+  type: string
+}
+export type Offers = Offer[]

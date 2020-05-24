@@ -13,6 +13,7 @@ export default {
     messagesCount: {uri: '/api/messages-count', method: 'GET'},
     markRead: {uri: '/api/messages-read', method: 'POST'},
     messages: {uri: '/api/messages', method: 'GET'},
-    conversation: {uri: '/api/messages/{conversationId}', method: 'GET'}
+    conversation: {uri: '/api/messages/{conversationId}', method: 'GET'},
+    offers: {uri: '/api/offers?filters={filters}&northEastLat={northEastLat}&northEastLng={northEastLng}&southWestLat={southWestLat}&southWestLng={southWestLng}', method: 'GET'}
   }
 }

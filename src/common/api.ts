@@ -1,5 +1,5 @@
 import agent from './agent'
-import { User, MessagesCount, Messages, Conversation } from '../declarations.d'
+import { User, MessagesCount, Messages, Conversation, Offers } from '../declarations.d'
 
 export const login = (username: string, password: string): Promise<User> =>
   agent('login', {username, password})
@@ -18,3 +18,6 @@ export const messages = async(): Promise<Messages> =>
 
 export const conversation = async(conversationId: string): Promise<Conversation> =>
   agent('conversation', null, {conversationId})
+
+export const offers = async(northEastLat: number, northEastLng: number, southWestLat: number, southWestLng: number, filters: any = {}): Promise<Offers> =>
+  agent('offers', null, {northEastLat, northEastLng, southWestLat, southWestLng, filters: JSON.stringify(filters)})
