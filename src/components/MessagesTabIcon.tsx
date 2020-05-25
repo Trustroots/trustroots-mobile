@@ -3,14 +3,14 @@ import { withBadge } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import colors from '../common/colors'
-import { useSelector, shallowEqual } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 type Props = {
   focused: boolean
 }
 
 export default ({focused}: Props) => {
-  const badge = useSelector((state: any) => state.app.unread, shallowEqual)
+  const badge = useSelector((state: any) => state.app.unread)
     , Component = badge ? withBadge(badge)(Icon) : Icon
 
   return (

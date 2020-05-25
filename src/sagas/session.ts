@@ -13,11 +13,11 @@ import {
   LOGOUT,
   KEYCHAIN,
   PROFILE,
-  MESSAGES_COUNT_SUCCESS
+  MESSAGES_COUNT_SUCCESS,
+  MESSAGES_COUNT_REQUEST
 } from '../common/constants'
 
 import { login, logout, unreadCount } from '../common/api'
-import { Linking } from 'react-native'
 import { getSession, setSession } from '../common/agent'
 
 function* loginFlow(username: string, password: string) {
@@ -44,6 +44,9 @@ function* loginFlow(username: string, password: string) {
 
     // Signal our successful login!
     yield put({type: LOGIN_SUCCESS, payload: getSession()})
+
+    // Request the unread message count
+    yield put({type: MESSAGES_COUNT_REQUEST})
 
     // Request and broadcast the profile information of our fresh user
     yield put({type: PROFILE, payload: user})
@@ -144,7 +147,7 @@ function* reauthenticateFlow() {
 }
 function* getInitialScene() {
   try {
-    const url = yield Linking.getInitialURL()
+    // const url = yield Linking.getInitialURL()
   } catch(e) {}
   return null
 }

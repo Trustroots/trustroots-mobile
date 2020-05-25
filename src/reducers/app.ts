@@ -49,11 +49,7 @@ export default function reducer(state = initialState, action: any = {}) {
       }
 
     case LOGOUT:
-      return {
-        ...state,
-        session: null,
-        authenticating: null
-      }
+      return {...initialState}
 
     default:
       return state

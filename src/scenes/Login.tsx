@@ -109,7 +109,7 @@ const Login = () => {
           transparent
         />
 
-        <Toast ref={toastRef} />
+        <Toast ref={toastRef} style={styles.toast} />
       </KeyboardAvoidingView>
     </SafeAreaView>
   )
@@ -151,6 +151,10 @@ const styles = StyleSheet.create({
 
   spacer: {
     height: 40
+  },
+
+  toast: {
+    backgroundColor: colors.background
   }
 })
 
