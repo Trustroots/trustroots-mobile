@@ -5,9 +5,6 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 import Router from './scenes/Router'
 import { store, persistor } from './common/store'
-import PushNotificationIOS from '@react-native-community/push-notification-ios'
-
-PushNotificationIOS.setApplicationIconBadgeNumber(100)
 
 // TODO: these should be kept to an *absolute* minimum and regularly reevaluated
 YellowBox.ignoreWarnings([
