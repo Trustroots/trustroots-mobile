@@ -43,7 +43,7 @@ const layerStyles = {
       '#f28cb1',
     ],
 
-    circleRadius: ['step', ['get', 'point_count'], 20, 100, 25, 750, 30],
+    circleRadius: ['step', ['get', 'point_count'], 15, 100, 20, 750, 25],
 
     circleOpacity: 0.84,
     circleStrokeWidth: 2,
@@ -70,6 +70,17 @@ export default () => {
             type: offer.type === 'meet' ? 'meet' : offer.status
           }))
         )
+      , onPress = async ({features}) => {
+        const { properties: { cluster, type, id }, geometry: { coordinates } } = features[0]
+        if (cluster) {
+          camera.current.setCamera({
+            centerCoordinate: coordinates,
+            zoomLevel: (await ref.current.getZoom()) + 2,
+            animationDuration: 500
+          })
+        } else
+          console.log(type, id)
+      }
 
   useEffect(() => {
     dispatch({type: OFFERS_REQUEST})
@@ -83,29 +94,6 @@ export default () => {
         logoEnabled={false}
         rotateEnabled={false}
         pitchEnabled={false}
-        onPress={async event => {
-          console.log(event)
-          const { screenPointX, screenPointY } = event.properties
-              , points = await ref.current.queryRenderedFeaturesAtPoint(
-                [screenPointX, screenPointY],
-                null,
-                ['clusteredPoints', 'singlePoint']
-              )
-
-          if (!points.features.length)
-            return
-
-          const { properties: { cluster, type, id }, geometry: { coordinates } } = points.features[0]
-          console.log(await ref.current.getZoom())
-          if (cluster) {
-            camera.current.setCamera({
-              centerCoordinate: coordinates,
-              zoomLevel: (await ref.current.getZoom()) + 2,
-              animationDuration: 500
-            })
-          } else
-            console.log(type, id)
-        }}
       >
         <MapboxGL.Camera
           ref={camera}
@@ -116,9 +104,9 @@ export default () => {
         <MapboxGL.ShapeSource
           id="offers"
           cluster
-          clusterRadius={50}
+          clusterRadius={30}
           shape={shape}
-          onPress={(s) => console.log(JSON.stringify(s, null, 2))}
+          onPress={onPress}
         >
           <MapboxGL.SymbolLayer
             id="pointCount"

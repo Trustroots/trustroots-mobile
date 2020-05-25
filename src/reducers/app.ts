@@ -3,12 +3,14 @@ import {
   LOGOUT,
   LOGIN_REQUEST,
   LOGIN_ERROR,
-  REQUEST_ERROR
+  REQUEST_ERROR,
+  MESSAGES_COUNT_SUCCESS
 } from '../common/constants'
 
 const initialState = {
   session: null,
-  authenticating: null
+  authenticating: null,
+  unread: 0
 }
 
 export default function reducer(state = initialState, action: any = {}) {
@@ -19,6 +21,12 @@ export default function reducer(state = initialState, action: any = {}) {
         ...state,
         authenticating: false
       } : state
+
+    case MESSAGES_COUNT_SUCCESS:
+      return {
+        ...state,
+        unread: payload
+      }
 
     case LOGIN_REQUEST:
       return {
