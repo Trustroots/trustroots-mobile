@@ -17,6 +17,6 @@ export default {
     messages: {uri: '/api/messages', method: 'GET'},
     conversation: {uri: '/api/messages/{conversationId}', method: 'GET'},
     offers: {uri: '/api/offers?filters={filters}&northEastLat={northEastLat}&northEastLng={northEastLng}&southWestLat={southWestLat}&southWestLng={southWestLng}', method: 'GET'},
-    offer: {uri: '/api/offers/${id}', method: 'GET'}
+    offer: {uri: '/api/offers/{offerId}', method: 'GET'}
   }
 }

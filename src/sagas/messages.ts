@@ -11,7 +11,7 @@ import {
 import { messages, unreadCount } from '../common/api'
 import { apiWatcher } from '../common/utils'
 
-export default function* conversationsSaga() {
+export default function* () {
   // Handle messages requests
   yield fork(apiWatcher(MESSAGES_REQUEST, MESSAGES_SUCCESS, messages))
 

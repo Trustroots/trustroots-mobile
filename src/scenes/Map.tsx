@@ -4,7 +4,7 @@ import MapboxGL from '@react-native-mapbox-gl/maps'
 import { featureCollection, point } from '@turf/helpers'
 
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
-import { OFFERS_REQUEST } from '../common/constants'
+import { OFFER_REQUEST, OFFERS_REQUEST } from '../common/constants'
 import { Offers } from '../declarations'
 
 import config from '../common/config'
@@ -79,7 +79,7 @@ export default () => {
             animationDuration: 500
           })
         } else
-          console.log(type, id)
+          dispatch({type: OFFER_REQUEST, payload: id})
       }
 
   useEffect(() => {

@@ -152,7 +152,7 @@ function* getInitialScene() {
   return null
 }
 
-export default function* loginSaga() {
+export default function* () {
   // Wait until our store got re-hydrated
   yield take('persist/REHYDRATE')
 

@@ -104,4 +104,4 @@ export type Offer = {
 }
 export type Offers = Offer[]
 
-export type ApiWatcher = Generator<TakeEffect | PutEffect<{type: any, payload: any}> | Promise<any>, void, never>
+export type ApiWatcher = Generator<TakeEffect | PutEffect<{type: string, payload: any}> | Promise<any>, void, never>

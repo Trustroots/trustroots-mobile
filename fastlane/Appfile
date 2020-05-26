@@ -1,3 +1,6 @@
+json_key_file "./android/keystores/trustroots.json"
+package_name "org.trustroots.trustrootsApp"
+
 app_identifier "org.trustroots"
 apple_id "m.strassburger@gmail.com"
 

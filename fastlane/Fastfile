@@ -10,12 +10,8 @@ default_platform(:ios)
 
 platform :ios do
   lane :certificates do
-    match(
-      app_identifier: [app, 'org.trustroots'],
-      type: 'development',
-      clone_branch_directly: true
-    )
-    match(app_identifier: [app, 'org.trustroots'], type: 'appstore', clone_branch_directly: true)
+    match(app_identifier: app, type: 'development', clone_branch_directly: true)
+    match(app_identifier: app, type: 'appstore', clone_branch_directly: true)
   end
 
   private_lane :build do

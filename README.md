@@ -6,7 +6,7 @@ The app is optimized for iOS and Android - one code, one love!
 
 ## 👩‍💻👨‍💻‍ Run / Compile it locally
 
-Setup your React Native environment by following the ```React Native CLI Quickstart``` in React Native's [Getting started guide](https://facebook.github.io/react-native/docs/getting-started).
+Setup your React Native environment by following the ```React Native CLI Quickstart``` in React Native's [environment setup guide](https://reactnative.dev/docs/environment-setup).
 
 After cloning the project, install the dependencies and you are ready to go:
 ```bash

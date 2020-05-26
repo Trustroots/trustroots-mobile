@@ -9,7 +9,7 @@ import {
   OFFER_SUCCESS
 } from '../common/constants'
 
-export default function* offersSaga() {
+export default function* () {
   // Watch and handle offer requests (triggered from the map)
   yield fork(apiWatcher(OFFER_REQUEST, OFFER_SUCCESS, offer))
 
