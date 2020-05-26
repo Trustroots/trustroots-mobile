@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { StyleSheet, Platform, View, Text, StatusBar, SafeAreaView, KeyboardAvoidingView, TouchableOpacity, Keyboard } from 'react-native'
+import { StyleSheet, Platform, View, Text, StatusBar, SafeAreaView, KeyboardAvoidingView, TouchableOpacity, Keyboard, ActivityIndicator } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 
 import Toast from 'react-native-easy-toast'
@@ -21,14 +21,16 @@ type ButtonRowProps = {
   onTextPress: () => void,
   transparent?: boolean,
   width?: number,
-  middle?: string
+  middle?: string,
+  busy?: boolean
 }
 
-const ButtonRow = ({label, width, text, transparent, onButtonPress, onTextPress, middle}: ButtonRowProps) =>
+const ButtonRow = ({label, width, text, transparent, onButtonPress, onTextPress, middle, busy}: ButtonRowProps) =>
   <View style={styles.row}>
     <Button
       label={label}
       small
+      busy={busy}
       transparent={transparent}
       width={width}
       onPress={onButtonPress}
@@ -95,6 +97,7 @@ const Login = () => {
             Keyboard.dismiss()
             dispatch({type: LOGIN_REQUEST})
           }}
+          busy={authenticating}
           onTextPress={() => null}
         />
 

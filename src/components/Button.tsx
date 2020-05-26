@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, ActivityIndicator, View } from 'react-native'
 import colors from '../common/colors'
 
 type Props = {
@@ -7,12 +7,14 @@ type Props = {
   transparent?: boolean,
   width?: number,
   small?: boolean,
+  busy?: boolean,
   onPress: () => void
 }
 
-const Button = ({label, transparent, onPress, width, small}: Props) => {
+const Button = ({label, transparent, onPress, width, small, busy}: Props) => {
   return (
     <TouchableOpacity
+      disabled={!!busy}
       style={{
         ...(small ? buttonStyleSmall : buttonStyle),
         ...(transparent ? styles.transparent : styles.normal),
@@ -20,9 +22,18 @@ const Button = ({label, transparent, onPress, width, small}: Props) => {
       }}
       onPress={onPress}
     >
-      <Text style={transparent ? styles.transparentText : styles.normalText}>
-        {label}
-      </Text>
+      <View style={styles.buttonContainer}>
+        {busy ?
+          <ActivityIndicator
+            size="small"
+            color={colors.background}
+          />
+        :
+          <Text style={transparent ? styles.transparentText : styles.normalText}>
+            {label}
+          </Text>
+        }
+      </View>
     </TouchableOpacity>
   )
 }
@@ -43,8 +54,12 @@ const buttonStyleSmall = {
 }
 
 const styles = StyleSheet.create({
-  normal: {
+  buttonContainer: {
+    height: 18,
     alignItems: 'center',
+    justifyContent: 'center'
+  },
+  normal: {
     backgroundColor: colors.button
   },
 
