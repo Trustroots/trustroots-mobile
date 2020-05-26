@@ -31,7 +31,7 @@ export const setSession = async (session: string) =>
 )
 
 export default (
-  endpoint: 'login' | 'logout' | 'messagesCount' | 'messages' | 'conversation' | 'markRead' | 'offers',
+  endpoint: 'login' | 'logout' | 'messagesCount' | 'messages' | 'conversation' | 'markRead' | 'offers' | 'offer',
   data?: any,
   options?: any
 ): Promise<any> => {

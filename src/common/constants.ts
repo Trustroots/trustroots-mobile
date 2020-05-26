@@ -20,3 +20,6 @@ export const MESSAGES_SUCCESS = '✅ MESSAGES_SUCCESS'
 
 export const OFFERS_REQUEST = '🔎 OFFERS_REQUEST'
 export const OFFERS_SUCCESS = '✅ OFFERS_SUCCESS'
+
+export const OFFER_REQUEST = '🔖 OFFER_REQUEST'
+export const OFFER_SUCCESS = '✅ OFFER_SUCCESS'

@@ -21,3 +21,6 @@ export const conversation = async (conversationId: string): Promise<Conversation
 
 export const offers = async (northEastLat: number, northEastLng: number, southWestLat: number, southWestLng: number, filters: any = {}): Promise<Offers> =>
   agent('offers', null, {northEastLat, northEastLng, southWestLat, southWestLng, filters: JSON.stringify(filters)})
+
+export const offer = async (offerId: string): Promise<Conversation> =>
+  agent('offer', null, {offerId})

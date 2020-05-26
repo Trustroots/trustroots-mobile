@@ -9,10 +9,11 @@ import {
 } from '../common/constants'
 
 import { messages, unreadCount } from '../common/api'
+import { apiWatcher } from '../common/utils'
 
 export default function* conversationsSaga() {
   // Handle messages requests
-  yield fork(messageWatcher)
+  yield fork(apiWatcher(MESSAGES_REQUEST, MESSAGES_SUCCESS, () => messages()))
 
   // Wait for actions altering the conversations unread counter
   yield fork(unreadWatcher)
@@ -39,15 +40,5 @@ function* unreadWatcher() {
         )
         break
     }
-  }
-}
-
-// Wait for message listing requests and fulfill them
-function* messageWatcher() {
-  while (true) {
-    yield take(MESSAGES_REQUEST)
-    try {
-      yield put({type: MESSAGES_SUCCESS, payload: yield messages()})
-    } catch(e) { /* Request error handling is happening @agent */ }
   }
 }
