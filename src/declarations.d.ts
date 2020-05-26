@@ -1,3 +1,5 @@
+import { TakeEffect, PutEffect } from "redux-saga/effects";
+
 declare module "*.svg" {
   import { SvgProps } from "react-native-svg";
   const content: React.FC<SvgProps>;
@@ -101,3 +103,5 @@ export type Offer = {
   type: 'host' | 'meet'
 }
 export type Offers = Offer[]
+
+export type ApiWatcher = Generator<TakeEffect | PutEffect<{type: any, payload: any}> | Promise<any>, void, never>

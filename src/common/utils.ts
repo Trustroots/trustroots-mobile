@@ -1,4 +1,18 @@
-import { UserReference } from '../declarations'
+import { UserReference, ApiWatcher } from '../declarations'
+import { take, put } from 'redux-saga/effects'
+
+export const apiWatcher =
+  (awaitAction: string, successAction: string, generator?: (payload?) => Promise<any>) =>
+    function* (): ApiWatcher {
+      while (true) {
+        // Wait until we get our expected event
+        const { payload } = yield take(awaitAction)
+        try {
+          // Yield the sub-generator and dispatch the successful result
+          yield put({type: successAction, payload: yield generator(payload)})
+        } catch(e) {/* Request errors are handled via Redux reducers */}
+      }
+    }
 
 export const userImageURL = (user: UserReference, size: number = 64): string =>
   user.avatarSource === 'local' ? `https://www.trustroots.org/uploads-profile/${user._id}/avatar/${size}.jpg` :
