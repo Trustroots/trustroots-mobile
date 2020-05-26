@@ -92,3 +92,42 @@ platform :ios do
     pilot(skip_waiting_for_build_processing: true)
   end
 end
+
+
+platform :android do
+  desc 'generate the android icons'
+  lane :icon do
+    android_appicon(
+      appicon_image_file: 'assets/icon-1024.png',
+      appicon_icon_types: [:launcher],
+      appicon_path: 'android/app/src/main/res/mipmap',
+      generate_rounded: true
+    )
+    android_appicon(
+      appicon_image_file: 'assets/icon-1024.png',
+      appicon_icon_types: [:notification],
+      appicon_path: 'android/app/src/main/res/drawable',
+      appicon_filename: 'ic_notification',
+      generate_rounded: true
+    )
+  end
+
+  desc 'clean and build release version'
+  lane :build do
+    gradle(task: 'clean', project_dir: 'android/')
+    gradle(task: 'assemble', project_dir: 'android/', build_type: 'Release')
+  end
+
+  lane :internal do
+    build
+    supply(
+      track: 'internal',
+      track_promote_to: 'internal',
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+    # git_commit(path: ['./android/gradle.properties'], message: ':construction_worker: android version bump')
+    # push_to_git_remote
+  end
+end
