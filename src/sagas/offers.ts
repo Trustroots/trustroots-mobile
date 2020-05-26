@@ -11,7 +11,7 @@ import {
 
 export default function* offersSaga() {
   // Watch and handle offer requests (triggered from the map)
-  yield fork(apiWatcher(OFFER_REQUEST, OFFER_SUCCESS, id => offer(id)))
+  yield fork(apiWatcher(OFFER_REQUEST, OFFER_SUCCESS, offer))
 
   // Watch and handle offer searches
   yield fork(apiWatcher(OFFERS_REQUEST, OFFERS_SUCCESS, () =>

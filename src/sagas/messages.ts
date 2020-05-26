@@ -13,7 +13,10 @@ import { apiWatcher } from '../common/utils'
 
 export default function* conversationsSaga() {
   // Handle messages requests
-  yield fork(apiWatcher(MESSAGES_REQUEST, MESSAGES_SUCCESS, () => messages()))
+  yield fork(apiWatcher(MESSAGES_REQUEST, MESSAGES_SUCCESS, messages))
+
+  // Handle message count requests
+  yield fork(apiWatcher(MESSAGES_COUNT_REQUEST, MESSAGES_COUNT_SUCCESS, unreadCount))
 
   // Wait for actions altering the conversations unread counter
   yield fork(unreadWatcher)
@@ -22,23 +25,14 @@ export default function* conversationsSaga() {
 // Handle unread messages requests and responses
 function* unreadWatcher() {
   while (true) {
-    const { type, payload } = yield take([MESSAGES_COUNT_REQUEST, MESSAGES_COUNT_REQUEST])
+    const { payload } = yield take(MESSAGES_COUNT_SUCCESS)
 
-    switch(type) {
-      case MESSAGES_COUNT_REQUEST:
-        yield put({type: MESSAGES_COUNT_SUCCESS, payload: yield unreadCount()})
-        break
-
-      case MESSAGES_COUNT_SUCCESS:
-        // Set the badge count depending on the relevant bridge
-        // TODO: this actually should work - but doesn't :D
-        yield call(
-          Platform.OS === 'ios' ?
-            PushNotificationIOS.setApplicationIconBadgeNumber :
-            AndroidBadge.setBadge,
-          payload
-        )
-        break
-    }
+    // Set the badge count depending on the relevant bridge
+    yield call(
+      Platform.OS === 'ios' ?
+        PushNotificationIOS.setApplicationIconBadgeNumber :
+        AndroidBadge.setBadge,
+      payload
+    )
   }
 }
