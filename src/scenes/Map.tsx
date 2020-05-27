@@ -16,6 +16,14 @@ MapboxGL.setAccessToken(config.mapboxToken)
 const overlayHeight = 200
 
 const layerStyles = {
+  selectedPoint: {
+    circleColor: '#f00',
+    circleOpacity: 0.84,
+    circleStrokeWidth: 2,
+    circleStrokeColor: 'white',
+    circleRadius: 15,
+    circlePitchAlignment: 'map',
+  },
   singlePoint: {
     circleColor: [
       'match',
@@ -110,6 +118,7 @@ export default () => {
         logoEnabled={false}
         rotateEnabled={false}
         pitchEnabled={false}
+        onPress={() => setShowOfferId(null)}
       >
         <MapboxGL.Camera
           ref={camera}
@@ -136,6 +145,13 @@ export default () => {
             filter={['has', 'point_count']}
             // @ts-ignore
             style={layerStyles.clusteredPoints}
+          />
+
+          <MapboxGL.CircleLayer
+            id="selectedPoint"
+            filter={['==', 'id', showOfferId]}
+            // @ts-ignore
+            style={layerStyles.selectedPoint}
           />
 
           <MapboxGL.CircleLayer
