@@ -104,6 +104,13 @@ export type Poi = {
 }
 export type Pois = Poi[]
 
-
+export interface Offer extends Poi {
+  user: User,
+  description: string,
+  noOfferDescription: string,
+  maxGuests: number,
+  updated: string,
+  validUntil: string
+}
 
 export type ApiWatcher = Generator<TakeEffect | PutEffect<{type: string, payload: any}> | Promise<any>, void, never>

@@ -1,5 +1,6 @@
-import { UserReference, ApiWatcher } from '../declarations'
+import { UserReference, ApiWatcher, User } from '../declarations'
 import { take, put } from 'redux-saga/effects'
+import moment from 'moment'
 
 export const apiWatcher =
   (awaitAction: string, successAction: string, generator?: (payload?) => Promise<any>) =>
@@ -14,7 +15,10 @@ export const apiWatcher =
       }
     }
 
-export const userImageURL = (user: UserReference, size: number = 64): string =>
+export const calculateAge = (date: string) =>
+  moment().diff(moment(date), 'years')
+
+export const userImageURL = (user: UserReference | User, size: number = 64): string =>
   user.avatarSource === 'local' ? `https://www.trustroots.org/uploads-profile/${user._id}/avatar/${size}.jpg` :
   user.avatarSource === 'facebook' ? `https://graph.facebook.com/${user.additionalProvidersData.facebook.id}/picture/?width=${size}&height=${size}` :
   user.avatarSource === 'gravatar' ? `https://gravatar.com/avatar/${user.emailHash}?s=${size}` :
