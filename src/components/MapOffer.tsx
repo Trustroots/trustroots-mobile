@@ -5,14 +5,15 @@ import { useSelector } from 'react-redux'
 import colors from '../common/colors'
 
 type Props = {
-  id: string
+  id: string,
+  height: number
 }
 
-export default ({id}: Props) => {
+export default ({id, height}: Props) => {
   const offer = useSelector((state: any) => state.offers.offers[id])
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {height}]}>
       {offer ?
         <View>
           <Text>{offer._id}</Text>
@@ -33,7 +34,6 @@ const styles = StyleSheet.create({
     bottom: 5,
     left: 5,
     right: 5,
-    height: 300,
     backgroundColor: colors.foreground,
     alignItems: 'center',
     justifyContent: 'center'

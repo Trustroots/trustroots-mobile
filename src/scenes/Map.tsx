@@ -13,6 +13,8 @@ import MapOffer from '../components/MapOffer'
 
 MapboxGL.setAccessToken(config.mapboxToken)
 
+const overlayHeight = 200
+
 const layerStyles = {
   singlePoint: {
     circleColor: [
@@ -74,7 +76,7 @@ export default () => {
             type: offer.type === 'meet' ? 'meet' : offer.status
           }))
         )
-      , onPress = async ({features}) => {
+      , onPress = async ({features, point}) => {
         const { properties: { cluster, id }, geometry: { coordinates } } = features[0]
         if (cluster) {
           camera.current.setCamera({
@@ -84,7 +86,14 @@ export default () => {
           })
         } else {
           dispatch({type: OFFER_REQUEST, payload: id})
-          camera.current.moveTo(coordinates, 500)
+
+          camera.current.moveTo(
+            await map.current.getCoordinateFromView([
+              point.x,
+              point.y + overlayHeight / 2
+            ]),
+            500
+          )
           setShowOfferId(id)
         }
       }
@@ -137,7 +146,7 @@ export default () => {
           />
         </MapboxGL.ShapeSource>
       </MapboxGL.MapView>
-      {showOfferId && <MapOffer id={showOfferId} />}
+      {showOfferId && <MapOffer id={showOfferId} height={overlayHeight} />}
     </View>
   )
 }
