@@ -1,10 +1,11 @@
 import React from 'react'
-import { StyleSheet, View, ActivityIndicator, Text } from 'react-native'
+import { StyleSheet, View, ActivityIndicator, Text, ScrollView } from 'react-native'
 import { useSelector } from 'react-redux'
 import Image from 'react-native-fast-image'
 import colors from '../common/colors'
 import { Offer } from '../declarations'
 import { userImageURL, calculateAge } from '../common/utils'
+import moment from 'moment'
 
 type Props = {
   id: string,
@@ -26,16 +27,25 @@ export default ({id, height}: Props) => {
             />
           </View>
           <View style={styles.right}>
-            <Text>
-              <Text style={styles.name}>{offer.user.displayName}{' '}</Text>
-              <Text style={styles.username}>@{offer.user.username}</Text>
-            </Text>
+            <Text style={styles.name}>{offer.user.displayName}</Text>
+            <Text style={styles.username}>@{offer.user.username}</Text>
             <Text style={styles.ageGender}>
               {offer.user.birthdate ? calculateAge(offer.user.birthdate) + ' years, ' : ''}
               {offer.user.gender}
             </Text>
-            <Text style={styles.description}>
-              {offer.description.replace(/<.+?>/g, '')}
+            <ScrollView style={styles.scroll}>
+              <Text style={styles.description}>
+                {offer.description.replace(/<.+?>/g, '')}
+              </Text>
+            </ScrollView>
+            {offer.type === 'meet' &&
+              <Text style={styles.updatedAgo}>
+                Updated {moment(offer.updated).fromNow()}
+              </Text>
+            }
+
+            <Text style={styles.tribesTitle}>
+              Tribes in common
             </Text>
           </View>
         </View>
@@ -55,7 +65,7 @@ const styles = StyleSheet.create({
     bottom: 5,
     left: 5,
     right: 5,
-    padding: 5,
+    padding: 10,
     backgroundColor: colors.foreground,
     alignItems: 'center',
     justifyContent: 'center'
@@ -80,9 +90,22 @@ const styles = StyleSheet.create({
     color: '#888',
     fontSize: 10
   },
-
+  scroll: {
+    flex: 1
+  },
   description: {
     marginTop: 10,
-    fontSize: 12
+    fontSize: 10,
+    color: '#000',
+  },
+  updatedAgo: {
+    marginTop: 10,
+    fontSize: 10,
+    color: '#888'
+  },
+  tribesTitle: {
+    fontSize: 10,
+    color: '#888',
+    textTransform: 'uppercase'
   }
 })
