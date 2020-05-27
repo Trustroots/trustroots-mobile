@@ -1,13 +1,16 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState, RefObject } from 'react'
 import { StyleSheet, View } from 'react-native'
 import MapboxGL from '@react-native-mapbox-gl/maps'
 import { featureCollection, point } from '@turf/helpers'
-
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
-import { OFFER_REQUEST, OFFERS_REQUEST } from '../common/constants'
-import { Offers } from '../declarations'
 
+import { OFFER_REQUEST, OFFERS_REQUEST } from '../common/constants'
+import { Pois } from '../declarations'
+
+import colors from '../common/colors'
 import config from '../common/config'
+import MapOffer from '../components/MapOffer'
+
 MapboxGL.setAccessToken(config.mapboxToken)
 
 const layerStyles = {
@@ -59,9 +62,10 @@ const layerStyles = {
 
 export default () => {
   const dispatch = useDispatch()
-      , ref: any = useRef()
-      , camera: any = useRef()
-      , offers = useSelector((state: any) => state.offers, shallowEqual) as Offers
+      , map: RefObject<MapboxGL.MapView> = useRef()
+      , camera: RefObject<MapboxGL.Camera> = useRef()
+      , offers: Pois = useSelector((state: any) => state.offers.pois, shallowEqual) || []
+      , [showOfferId, setShowOfferId] = useState(null)
       , shape = featureCollection(
           offers
           .filter(offer => offer.location && offer.location.length == 2)
@@ -71,15 +75,18 @@ export default () => {
           }))
         )
       , onPress = async ({features}) => {
-        const { properties: { cluster, type, id }, geometry: { coordinates } } = features[0]
+        const { properties: { cluster, id }, geometry: { coordinates } } = features[0]
         if (cluster) {
           camera.current.setCamera({
             centerCoordinate: coordinates,
-            zoomLevel: (await ref.current.getZoom()) + 2,
+            zoomLevel: (await map.current.getZoom()) + 2,
             animationDuration: 500
           })
-        } else
+        } else {
           dispatch({type: OFFER_REQUEST, payload: id})
+          camera.current.moveTo(coordinates, 500)
+          setShowOfferId(id)
+        }
       }
 
   useEffect(() => {
@@ -89,7 +96,7 @@ export default () => {
   return (
     <View style={styles.container} testID="map.scene">
       <MapboxGL.MapView
-        ref={ref}
+        ref={map}
         style={styles.map}
         logoEnabled={false}
         rotateEnabled={false}
@@ -130,6 +137,7 @@ export default () => {
           />
         </MapboxGL.ShapeSource>
       </MapboxGL.MapView>
+      {showOfferId && <MapOffer id={showOfferId} />}
     </View>
   )
 }
@@ -140,5 +148,13 @@ const styles = StyleSheet.create({
   },
   map: {
     flex: 1
+  },
+  offer: {
+    position: 'absolute',
+    bottom: 5,
+    left: 5,
+    right: 5,
+    height: 300,
+    backgroundColor: colors.foreground
   }
 })

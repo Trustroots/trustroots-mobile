@@ -96,12 +96,14 @@ export type Message = {
   created: string
 }
 
-export type Offer = {
+export type Poi = {
   _id: string,
   location: number[],
   status: 'maybe' | 'yes',
   type: 'host' | 'meet'
 }
-export type Offers = Offer[]
+export type Pois = Poi[]
+
+
 
 export type ApiWatcher = Generator<TakeEffect | PutEffect<{type: string, payload: any}> | Promise<any>, void, never>
