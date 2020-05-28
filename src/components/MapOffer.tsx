@@ -35,6 +35,19 @@ export default ({id, height}: Props) => {
               source={{uri: userImageURL(offer.user, 256)}}
               resizeMode="contain"
             />
+            {offer.type === 'host' &&
+              <View style={styles.status}>
+                {offer.status === 'maybe' ?
+                  <Text style={styles.hostingMaybe}>
+                    maybe hosting
+                  </Text>
+                :
+                  <Text style={styles.hostingYes}>
+                    hosting
+                  </Text>
+                }
+              </View>
+            }
           </View>
           <View style={styles.right}>
             <Text style={styles.name}>{offer.user.displayName}</Text>
@@ -91,10 +104,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   left: {
-    width: 140
+    width: 128
   },
   right: {
-    flex: 1
+    flex: 1,
+    paddingLeft: 10
   },
   name: {
     color: '#000'
@@ -108,10 +122,10 @@ const styles = StyleSheet.create({
     fontSize: 12
   },
   scroll: {
-    flex: 1
+    flex: 1,
+    marginTop: 5
   },
   description: {
-    marginTop: 10,
     fontSize: 12,
     color: '#000',
   },
@@ -128,5 +142,38 @@ const styles = StyleSheet.create({
   },
   tribes: {
     fontSize: 12
+  },
+  status: {
+    paddingTop: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-around'
+  },
+  hostingTitle: {
+    fontSize: 12,
+    color: '#888',
+    paddingTop: 5,
+    paddingBottom: 5
+  },
+  hostingMaybe: {
+    borderRadius: 5,
+    backgroundColor: colors.hostingMaybe,
+    color: colors.foreground,
+    padding: 5,
+    textTransform: 'uppercase',
+    fontSize: 12,
+    fontWeight: 'bold'
+  },
+  hostingYes: {
+    borderRadius: 5,
+    backgroundColor: colors.hostingYes,
+    color: colors.foreground,
+    paddingTop: 4,
+    paddingBottom: 4,
+    paddingLeft: 8,
+    paddingRight: 8,
+    textTransform: 'uppercase',
+    fontSize: 12,
+    fontWeight: 'bold',
+    textAlignVertical: 'center',
   }
 })

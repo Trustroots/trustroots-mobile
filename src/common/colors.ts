@@ -8,6 +8,9 @@ export default {
   text: '#333',
   link: '#cd771b',
 
+  hostingYes: '#12B591',
+  hostingMaybe: '#cd771b',
+
   button: '#fff',
   buttonText: '#12B591',
 

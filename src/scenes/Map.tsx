@@ -13,7 +13,7 @@ import MapOffer from '../components/MapOffer'
 
 MapboxGL.setAccessToken(config.mapboxToken)
 
-const overlayHeight = 150
+const overlayHeight = 180
 
 const layerStyles = {
   selectedPoint: {
