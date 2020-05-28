@@ -11,6 +11,7 @@ import Welcome from './Welcome'
 import Login from './Login'
 import Map from './Map'
 import Messages from './Messages'
+import Profile from './Profile'
 
 import colors from '../common/colors'
 import MessagesTabIcon from '../components/MessagesTabIcon'
@@ -43,6 +44,7 @@ const App = () => {
         <Scene key="loading" component={Loading}  />
         <Scene key="welcome" component={Welcome} />
         <Scene key="login" component={Login} />
+        <Scene key="profile" component={Profile} />
 
         <RouterDrawer
           hideNavBar
@@ -50,7 +52,6 @@ const App = () => {
           contentComponent={Drawer}
           drawerIcon={() => <DrawerIcon />}
           drawerWidth={240}
-          initial
         >
           <Tabs
             key="main"
@@ -69,7 +70,6 @@ const App = () => {
               title="Search"
               component={Map}
               icon={icon('map-marker')}
-              initial
             />
           </Tabs>
         </RouterDrawer>
