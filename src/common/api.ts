@@ -24,3 +24,6 @@ export const offers = async (northEastLat: number, northEastLng: number, southWe
 
 export const offer = async (offerId: string): Promise<Conversation> =>
   agent('offer', null, {offerId})
+
+export const profile = async (username: string): Promise<User> =>
+  agent('profile', null, {username})
