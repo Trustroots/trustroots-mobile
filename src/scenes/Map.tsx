@@ -13,7 +13,7 @@ import MapOffer from '../components/MapOffer'
 
 MapboxGL.setAccessToken(config.mapboxToken)
 
-const overlayHeight = 160
+const overlayHeight = 150
 
 const layerStyles = {
   selectedPoint: {
@@ -84,7 +84,7 @@ export default () => {
             type: offer.type === 'meet' ? 'meet' : offer.status
           }))
         )
-      , onPress = async ({features, point}) => {
+      , onPress = async ({features}) => {
         const { properties: { cluster, id }, geometry: { coordinates } } = features[0]
         if (cluster) {
           camera.current.setCamera({
@@ -95,10 +95,12 @@ export default () => {
         } else {
           dispatch({type: OFFER_REQUEST, payload: id})
 
+          const point = await map.current.getPointInView(coordinates)
+
           camera.current.moveTo(
             await map.current.getCoordinateFromView([
-              point.x,
-              point.y + overlayHeight / 2
+              point[0],
+              point[1] + overlayHeight / 2
             ]),
             500
           )
@@ -122,7 +124,7 @@ export default () => {
       >
         <MapboxGL.Camera
           ref={camera}
-          zoomLevel={6}
+          zoomLevel={2.7}
           centerCoordinate={[11, 48]}
         />
 

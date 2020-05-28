@@ -44,7 +44,14 @@ const App = () => {
         <Scene key="loading" component={Loading}  />
         <Scene key="welcome" component={Welcome} />
         <Scene key="login" component={Login} />
-        <Scene key="profile" component={Profile} />
+
+        <Scene
+          key="profile"
+          component={Profile}
+          hideNavBar={false}
+          headerBackTitle=""
+          title="Profile"
+        />
 
         <RouterDrawer
           hideNavBar
@@ -52,6 +59,8 @@ const App = () => {
           contentComponent={Drawer}
           drawerIcon={() => <DrawerIcon />}
           drawerWidth={240}
+
+          initial
         >
           <Tabs
             key="main"
@@ -60,16 +69,22 @@ const App = () => {
             inactiveTintColor="#9E837A"
           >
             <Scene
+              key="map"
+              title="Search"
+              component={Map}
+              icon={icon('map-search-outline')}
+            />
+            <Scene
               icon={MessagesTabIcon}
               key="messages"
               title="Messages"
               component={Messages}
             />
             <Scene
-              key="map"
-              title="Search"
-              component={Map}
-              icon={icon('map-marker')}
+              key="you"
+              title="Your profile"
+              component={Profile}
+              icon={icon('human-greeting')}
             />
           </Tabs>
         </RouterDrawer>

@@ -44,7 +44,7 @@ export type User = {
   extSitesCS: string,
   member: {
     since: string,
-    tribe: string
+    tribe: Tribe
   }[],
   pushRegistration: {
     created: string,
@@ -57,6 +57,19 @@ export type User = {
   updated: string,
   // In case the login fails
   message: string
+}
+
+export type Tribe = {
+  count: number,
+  slug: string,
+  _id: string,
+  label: string
+  color: string,
+  created: string,
+  description: string,
+  image_UUID:	string,
+  attribution: string,
+  attribution_url: string
 }
 
 export type MessagesCount = {

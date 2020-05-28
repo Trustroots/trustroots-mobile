@@ -1,11 +1,12 @@
 import React from 'react'
-import { StyleSheet, View, ActivityIndicator, Text, ScrollView } from 'react-native'
+import { StyleSheet, View, ActivityIndicator, Text, ScrollView, TouchableOpacity } from 'react-native'
 import { useSelector } from 'react-redux'
 import Image from 'react-native-fast-image'
 import colors from '../common/colors'
-import { Offer } from '../declarations'
+import { Offer, User } from '../declarations'
 import { userImageURL, calculateAge } from '../common/utils'
 import moment from 'moment'
+import { Actions } from 'react-native-router-flux'
 
 type Props = {
   id: string,
@@ -14,9 +15,18 @@ type Props = {
 
 export default ({id, height}: Props) => {
   const offer: Offer = useSelector((state: any) => state.offers.offers[id])
+      , ownTribes = new Set(useSelector((state: any) => (state.profile as User).memberIds) || [])
+      , tribesInCommon = !offer ? [] :
+        (offer.user.member || [])
+        .filter(membership => ownTribes.has(membership.tribe._id))
+        .map(membership => membership.tribe)
 
   return (
-    <View style={[styles.container, {height}]}>
+    <TouchableOpacity
+      style={[styles.container, {height}]}
+      activeOpacity={0.7}
+      onPress={() => Actions.push('profile')}
+    >
       {offer ?
         <View style={styles.row}>
           <View style={styles.left}>
@@ -43,10 +53,16 @@ export default ({id, height}: Props) => {
                 Updated {moment(offer.updated).fromNow()}
               </Text>
             }
-
-            <Text style={styles.tribesTitle}>
-              Tribes in common
-            </Text>
+            {!!tribesInCommon.length &&
+              <>
+                <Text style={styles.tribesTitle}>
+                  Tribes in common
+                </Text>
+                <Text style={styles.tribes}>
+                  {tribesInCommon.map(tribe => tribe.label).join(' - ')}
+                </Text>
+              </>
+            }
           </View>
         </View>
       :
@@ -55,7 +71,7 @@ export default ({id, height}: Props) => {
           color={colors.background}
         />
       }
-    </View>
+    </TouchableOpacity>
   )
 }
 
@@ -68,10 +84,11 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: colors.foreground,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'flex-start'
   },
   row: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    flex: 1,
   },
   left: {
     width: 140
@@ -84,28 +101,32 @@ const styles = StyleSheet.create({
   },
   username: {
     color: '#888',
-    fontSize: 10
+    fontSize: 12
   },
   ageGender: {
     color: '#888',
-    fontSize: 10
+    fontSize: 12
   },
   scroll: {
     flex: 1
   },
   description: {
     marginTop: 10,
-    fontSize: 10,
+    fontSize: 12,
     color: '#000',
   },
   updatedAgo: {
     marginTop: 10,
-    fontSize: 10,
+    fontSize: 12,
     color: '#888'
   },
   tribesTitle: {
-    fontSize: 10,
+    marginTop: 10,
+    fontSize: 12,
     color: '#888',
     textTransform: 'uppercase'
+  },
+  tribes: {
+    fontSize: 12
   }
 })

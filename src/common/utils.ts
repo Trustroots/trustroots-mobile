@@ -18,8 +18,10 @@ export const apiWatcher =
 export const calculateAge = (date: string) =>
   moment().diff(moment(date), 'years')
 
+const fallbackURL = 'https://www.trustroots.org/img/avatar.png'
+
 export const userImageURL = (user: UserReference | User, size: number = 64): string =>
   user.avatarSource === 'local' ? `https://www.trustroots.org/uploads-profile/${user._id}/avatar/${size}.jpg` :
   user.avatarSource === 'facebook' ? `https://graph.facebook.com/${user.additionalProvidersData.facebook.id}/picture/?width=${size}&height=${size}` :
-  user.avatarSource === 'gravatar' ? `https://gravatar.com/avatar/${user.emailHash}?s=${size}` :
-  null
+  user.avatarSource === 'gravatar' ? `https://gravatar.com/avatar/${user.emailHash}?s=${size}&d=${fallbackURL}` :
+  fallbackURL
