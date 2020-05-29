@@ -25,7 +25,7 @@ export default ({id, height}: Props) => {
     <TouchableOpacity
       style={[styles.container, {height}]}
       activeOpacity={0.7}
-      onPress={() => Actions.push('profile')}
+      onPress={() => Actions.push('profile', {username: offer.user.username})}
     >
       {offer ?
         <View style={styles.row}>
@@ -94,7 +94,10 @@ const styles = StyleSheet.create({
     bottom: 5,
     left: 5,
     right: 5,
-    padding: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingTop: 10,
+    paddingBottom: 5,
     backgroundColor: colors.foreground,
     alignItems: 'center',
     justifyContent: 'flex-start'

@@ -12,6 +12,7 @@ import Login from './Login'
 import Map from './Map'
 import Messages from './Messages'
 import Profile from './Profile'
+import ProfileTitle from '../components/ProfileTitle'
 
 import colors from '../common/colors'
 import MessagesTabIcon from '../components/MessagesTabIcon'
@@ -50,7 +51,7 @@ const App = () => {
           component={Profile}
           hideNavBar={false}
           headerBackTitle=""
-          title="Profile"
+          renderTitle={({username}) => <ProfileTitle username={username} />}
         />
 
         <RouterDrawer
