@@ -1,8 +1,16 @@
-import * as React from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet } from 'react-native'
 import { TabView, TabBar, SceneMap, NavigationState, SceneRendererProps } from 'react-native-tab-view'
 import Empty from './Empty'
 import colors from '../common/colors'
+
+import ProfileOverview from './ProfileOverview'
+import { useDispatch } from 'react-redux'
+import { PROFILE_REQUEST } from '../common/constants'
+
+type Props = {
+  username?: string
+}
 
 type TabState = NavigationState<{
   key: string,
@@ -17,17 +25,7 @@ const routes = [
   { key: 'contacts', title: 'Contacts' },
 ]
 
-const renderScene = SceneMap({
-  overview: Empty,
-  about: Empty,
-  tribes: Empty,
-  hosting: Empty,
-  contacts: Empty
-})
-
-const renderTabBar = (
-  props: SceneRendererProps & { navigationState: TabState}
-) => (
+const renderTabBar = (props: SceneRendererProps & { navigationState: TabState}) =>
   <TabBar
     {...props}
     scrollEnabled
@@ -36,20 +34,30 @@ const renderTabBar = (
     labelStyle={styles.label}
     tabStyle={styles.tabStyle}
   />
-)
 
-export default () => {
-  const [index, setIndex] = React.useState(1)
+export default ({username}: Props) => {
+  const [index, setIndex] = useState(0)
+      , dispatch = useDispatch()
+
+  useEffect(() => {
+    if (username)
+      dispatch({type: PROFILE_REQUEST, payload: username})
+  }, [username])
+
   return (
     <TabView
       navigationState={{routes, index}}
-      renderScene={renderScene}
       renderTabBar={renderTabBar}
       onIndexChange={setIndex}
+      renderScene={({route}) => {
+        switch(route.key) {
+          case 'overview': return <ProfileOverview username={username} />
+          default: return <Empty />
+        }
+      }}
     />
   )
 }
-
 
 const styles = StyleSheet.create({
   tabbar: {

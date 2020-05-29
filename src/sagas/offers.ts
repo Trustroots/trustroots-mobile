@@ -15,11 +15,6 @@ export default function* () {
 
   // Watch and handle offer searches
   yield fork(apiWatcher(OFFERS_REQUEST, OFFERS_SUCCESS, () =>
-    offers(
-      63.079544234557304,
-      40.36425781250001,
-      20.471954507739227,
-      -13.4697265625
-    )
+    offers(-90, 180, 90, -180, {seen: {months: 6}})
   ))
 }

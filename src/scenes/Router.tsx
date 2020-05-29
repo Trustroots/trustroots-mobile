@@ -50,7 +50,7 @@ const App = () => {
           key="profile"
           component={Profile}
           hideNavBar={false}
-          headerBackTitle=""
+          backTitle=" "
           renderTitle={({username}) => <ProfileTitle username={username} />}
         />
 

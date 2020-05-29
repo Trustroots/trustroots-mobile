@@ -13,7 +13,7 @@ import MapOffer from '../components/MapOffer'
 
 MapboxGL.setAccessToken(config.mapboxToken)
 
-const overlayHeight = 180
+const overlayHeight = 175
 
 const layerStyles = {
   selectedPoint: {
@@ -28,13 +28,10 @@ const layerStyles = {
     circleColor: [
       'match',
       ['get', 'type'],
-      'yes',
-      '#59BA58',
-      'maybe',
-      '#F2AE44',
-      'meet',
-      '#0081A1',
-      '#ccc'
+      'yes', colors.hostingYes,
+      'maybe', colors.hostingMaybe,
+      'meet', colors.meeting,
+      '#000'
     ],
     circleOpacity: 0.84,
     circleStrokeWidth: 2,
@@ -49,10 +46,8 @@ const layerStyles = {
     circleColor: [
       'step',
       ['get', 'point_count'],
-      '#51bbd6',
-      100,
-      '#f1f075',
-      750,
+      '#51bbd6', 100,
+      '#f1f075', 750,
       '#f28cb1',
     ],
 
