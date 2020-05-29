@@ -87,6 +87,7 @@ export default () => {
             zoomLevel: (await map.current.getZoom()) + 2,
             animationDuration: 500
           })
+          setShowOfferId(null)
         } else {
           dispatch({type: OFFER_REQUEST, payload: id})
 

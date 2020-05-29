@@ -25,3 +25,7 @@ export const userImageURL = (user: UserReference | User, size: number = 64): str
   user.avatarSource === 'facebook' ? `https://graph.facebook.com/${user.additionalProvidersData.facebook.id}/picture/?width=${size}&height=${size}` :
   user.avatarSource === 'gravatar' ? `https://gravatar.com/avatar/${user.emailHash}?s=${size}&d=${fallbackURL}` :
   fallbackURL
+
+export const birthdayAndGender = (user: User): string =>
+  (user.birthdate ? calculateAge(user.birthdate) + ' years, ' : '') +
+  user.gender

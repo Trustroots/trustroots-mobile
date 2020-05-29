@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import Image from 'react-native-fast-image'
 import colors from '../common/colors'
 import { Offer, User } from '../declarations'
-import { userImageURL, calculateAge } from '../common/utils'
+import { userImageURL, birthdayAndGender } from '../common/utils'
 import moment from 'moment'
 import { Actions } from 'react-native-router-flux'
 
@@ -53,8 +53,7 @@ export default ({id, height}: Props) => {
             <Text style={styles.name}>{offer.user.displayName}</Text>
             <Text style={styles.username}>@{offer.user.username}</Text>
             <Text style={styles.ageGender}>
-              {offer.user.birthdate ? calculateAge(offer.user.birthdate) + ' years, ' : ''}
-              {offer.user.gender}
+              {birthdayAndGender(offer.user)}
             </Text>
             <ScrollView style={styles.scroll}>
               <Text style={styles.description}>
