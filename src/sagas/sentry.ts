@@ -3,7 +3,6 @@ import * as Sentry from '@sentry/react-native'
 import {
   LOGIN_REQUEST,
   KEYCHAIN,
-  LOGIN_SUCCESS,
   MESSAGES_SUCCESS,
   PROFILE,
 } from '../common/constants'
@@ -11,7 +10,6 @@ import {
 const filter = {}
 
 filter[LOGIN_REQUEST] = ['password']
-filter[LOGIN_SUCCESS] = ['session']
 filter[KEYCHAIN] = ['password']
 filter[PROFILE] = ['additionalProvidersData']
 filter[MESSAGES_SUCCESS] = ['*.content']
@@ -31,7 +29,7 @@ export default function* () {
     const { type, payload } = yield take()
 
     // Skip form and init actions
-    if (type.startsWith('rrf') || type.startsWith('@'))
+    if (type.startsWith('rrf') || type.startsWith('@') || type.startsWith('persist'))
       continue
 
     // Apply our recursive censorship magic ;)

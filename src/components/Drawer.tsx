@@ -27,6 +27,13 @@ export default () => {
       </View>
       <View style={styles.content}>
         <DrawerButton
+          onPress={() => {
+            throw new Error("Test crash")
+          }}
+          icon="bomb"
+          label="Crash me!"
+        />
+        <DrawerButton
           onPress={() => dispatch({type: LOGOUT})}
           icon="exit-to-app"
           label="Logout"

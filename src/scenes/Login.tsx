@@ -55,6 +55,8 @@ const Login = () => {
   const dispatch = useDispatch()
       , authenticating = useSelector((state: any) => state.app.authenticating) as boolean
       , toastRef = useRef(null)
+      // @ts-ignore
+      , toast = <Toast ref={toastRef} style={styles.toast} />
 
   useEffect(() => {
     if (authenticating === false) {
@@ -111,8 +113,7 @@ const Login = () => {
           text="Back home"
           transparent
         />
-
-        <Toast ref={toastRef} style={styles.toast} />
+        {toast}
       </KeyboardAvoidingView>
     </SafeAreaView>
   )
