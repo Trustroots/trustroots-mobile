@@ -79,7 +79,11 @@ export default class CommonListEntry extends PureComponent<Props> {
             <View style={[styles.lastMessage]}>
               {!!subtitlePhoto &&
                 <View style={styles.lastMessageImage}>
-                  {/* <RoundedImage photo={subtitlePhoto} /> */}
+                  <FastImage
+                    source={{uri: subtitlePhoto}}
+                    style={{width: 18, height: 18}}
+                    resizeMode="contain"
+                  />
                 </View>
               }
               <Text

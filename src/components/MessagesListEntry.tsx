@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Actions } from 'react-native-router-flux'
 
 import CommonListEntry from './CommonListEntry'
@@ -9,25 +9,24 @@ type Props = {
   conversation: Conversation
   testID: string,
   isLast: boolean,
+  isSent: boolean
 }
 
-export default class ConversationsItem extends Component<Props> {
-  render() {
-    const { conversation, testID, isLast } = this.props
-        , { message: {excerpt}, _id, read, userTo, userFrom, updated } = conversation
-        , user = userFrom
-        , image = userImageURL(user, 256)
+export default ({conversation, testID, isLast, isSent}: Props) => {
+  const { message: {excerpt}, _id, read, userTo, userFrom, updated } = conversation
+      , user = isSent ? userTo : userFrom
 
-    return <CommonListEntry
-      picture={image}
+  return (
+    <CommonListEntry
+      picture={userImageURL(user, 256)}
       onPress={() => Actions.jump('conversation', {conversationId: _id})}
       testID={testID}
       title={user.displayName}
       timestamp={Date.parse(updated)}
-      subtitlePhoto={null}
+      subtitlePhoto={isSent ? userImageURL(userFrom, 256) : null}
       subtitle={excerpt}
       isLast={isLast}
       isUnread={!read}
     />
-  }
+  )
 }

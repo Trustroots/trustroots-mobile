@@ -4,7 +4,7 @@ import { SafeAreaView, StyleSheet, FlatList, StatusBar, View, Text } from 'react
 import colors from '../common/colors'
 import { useDispatch, useSelector } from 'react-redux'
 import { MESSAGES_REQUEST } from '../common/constants'
-import { Messages } from '../declarations'
+import { Messages, User } from '../declarations'
 import MessagesListEntry from '../components/MessagesListEntry'
 
 type Props = {
@@ -15,7 +15,8 @@ export default ({navigation}: Props) => {
   const [refreshing, setRefreshing] = useState(false)
       , dispatch = useDispatch()
       , pull = () => dispatch({type: MESSAGES_REQUEST})
-      , messages = useSelector((state: any) => state.conversations) as Messages
+      , messages: Messages = useSelector((state: any) => state.conversations)
+      , me: User = useSelector((state: any) => state.profile)
 
   useEffect(() => {
     if (navigation) {
@@ -43,6 +44,7 @@ export default ({navigation}: Props) => {
               conversation={item}
               testID={'conversations.'+index}
               isLast={index === messages.length - 1}
+              isSent={item.userFrom._id === me._id}
             />
           }
         />
