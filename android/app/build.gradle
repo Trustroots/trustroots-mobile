@@ -130,7 +130,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "org.trustroots.trustrootsApp"
+        applicationId "org.trustroots.beta"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
