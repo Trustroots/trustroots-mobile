@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet } from 'react-native'
-import { TabView, TabBar, SceneMap, NavigationState, SceneRendererProps } from 'react-native-tab-view'
+import { TabView, TabBar, NavigationState, SceneRendererProps } from 'react-native-tab-view'
 import Empty from './Empty'
 import colors from '../common/colors'
 
 import ProfileOverview from './ProfileOverview'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { PROFILE_REQUEST } from '../common/constants'
+import { User } from '../declarations'
 
 type Props = {
   username?: string
@@ -37,12 +38,14 @@ const renderTabBar = (props: SceneRendererProps & { navigationState: TabState}) 
 
 export default ({username}: Props) => {
   const [index, setIndex] = useState(0)
+      , me: string = useSelector((state: any) => state.profile.username)
+      , display = username || me
       , dispatch = useDispatch()
 
   useEffect(() => {
-    if (username)
-      dispatch({type: PROFILE_REQUEST, payload: username})
-  }, [username])
+    if (display)
+      dispatch({type: PROFILE_REQUEST, payload: display})
+  }, [display])
 
   return (
     <TabView
@@ -51,7 +54,7 @@ export default ({username}: Props) => {
       onIndexChange={setIndex}
       renderScene={({route}) => {
         switch(route.key) {
-          case 'overview': return <ProfileOverview username={username} />
+          case 'overview': return <ProfileOverview username={display} />
           default: return <Empty />
         }
       }}

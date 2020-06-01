@@ -6,8 +6,8 @@ import * as Sentry from '@sentry/react-native'
 import Router from './scenes/Router'
 import { store, persistor } from './common/store'
 
-
-// if (!__DEV__)
+// Only enable sentry in production builds
+if (!__DEV__)
   Sentry.init({
     dsn: 'https://0636d6c8a5d44207932803e14587b8e4@o217834.ingest.sentry.io/5260211'
   })

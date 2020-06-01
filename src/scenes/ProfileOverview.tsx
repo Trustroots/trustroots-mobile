@@ -45,17 +45,17 @@ export default ({username}: Props) => {
             Online {moment(profile.seen).fromNow()}
           </Text>
 
-          {profile.locationLiving &&
+          {!!profile.locationLiving &&
             <Text style={styles.text}>
               Lives in {profile.locationLiving}
             </Text>
           }
-          {profile.locationFrom &&
+          {!!profile.locationFrom &&
             <Text style={styles.text}>
               From {profile.locationFrom}
             </Text>
           }
-          {profile.languages.length &&
+          {!!profile.languages.length &&
             <>
               <Text style={styles.label}>
                 Languages
