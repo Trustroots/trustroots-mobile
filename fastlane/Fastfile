@@ -126,4 +126,16 @@ platform :android do
     # git_commit(path: ['./android/gradle.properties'], message: ':construction_worker: android version bump')
     # push_to_git_remote
   end
+
+  lane :upload_metadata do
+    supply(
+      track: 'beta',
+      skip_upload_apk: true,
+      skip_upload_aab: true,
+      skip_upload_metadata: false,
+      skip_upload_changelogs: true,
+      skip_upload_images: false,
+      skip_upload_screenshots: false
+    )
+  end
 end

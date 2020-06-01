@@ -1,7 +1,7 @@
 json_key_file "./android/keystores/trustroots.json"
-package_name "org.trustroots.trustrootsApp"
+package_name "org.trustroots.beta"
 
-app_identifier "org.trustroots.trustrootsApp"
+app_identifier "org.trustroots.beta"
 apple_id "m.strassburger@gmail.com"
 
 team_id "SUJ594N47C"

@@ -65,6 +65,11 @@ clean and build release version
 fastlane android internal
 ```
 
+### android upload_metadata
+```
+fastlane android upload_metadata
+```
+
 
 ----
 
