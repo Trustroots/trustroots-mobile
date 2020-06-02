@@ -1,9 +1,9 @@
 update_fastlane
 
-app = 'org.trustroots'
+app = 'org.trustroots.beta'
 project = './ios/trustroots.xcodeproj'
 workspace = './ios/trustroots.xcworkspace'
-profile_uuid = 'da71a66f-0e86-42b0-8a9d-8f5af2a356f7'
+profile_uuid = 'd87a24e6-0119-45af-9eb4-7a3b23020a15'
 scheme = 'trustroots'
 
 default_platform(:ios)
@@ -80,9 +80,9 @@ platform :ios do
   end
 
   lane :beta do
-    bump
-    icon
-    beta_badge
+    # bump
+    # icon
+    # beta_badge
     build
 
     pilot(skip_waiting_for_build_processing: true)
