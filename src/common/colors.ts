@@ -37,5 +37,10 @@ export default {
   messageUnread: '#f00',
   messagePreview: '#888',
   messageUnreadBackground: '#fefefe',
-  messageDate: '#888'
+  messageDate: '#888',
+
+  tabBackground: '#fff',
+  tabText: '#888',
+  tabIndicator: '#12B591'
+
 }

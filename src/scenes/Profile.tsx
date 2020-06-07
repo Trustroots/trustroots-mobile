@@ -64,13 +64,14 @@ export default ({username}: Props) => {
 
 const styles = StyleSheet.create({
   tabbar: {
-    backgroundColor: colors.background
+    backgroundColor: colors.tabBackground
   },
   indicator: {
-    backgroundColor: '#ffeb3b'
+    backgroundColor: colors.tabIndicator
   },
   label: {
-    fontWeight: '600'
+    fontWeight: '600',
+    color: colors.tabText
   },
   tabStyle: {
     width: 'auto'
