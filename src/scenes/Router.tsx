@@ -22,7 +22,7 @@ const icon = (name: string, size: number = 32, color?: string, badge?: number) =
   return (
     <Component
       testID={`navigation.${name}`}
-      name={name}
+      name={focused ? name : name + '-outline'}
       size={size || 32}
       style={{marginTop: 3, color:
         color ? color :
@@ -71,7 +71,7 @@ const App = () => {
               key="map"
               title="Search"
               component={Map}
-              icon={icon('map-search-outline')}
+              icon={icon('map-search')}
             />
             <Scene
               icon={MessagesTabIcon}
@@ -83,7 +83,7 @@ const App = () => {
               key="you"
               title="Your profile"
               component={Profile}
-              icon={icon('human-greeting')}
+              icon={icon('account-circle')}
             />
           </Tabs>
         </RouterDrawer>

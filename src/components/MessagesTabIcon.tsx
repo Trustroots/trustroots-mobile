@@ -16,7 +16,7 @@ export default ({focused}: Props) => {
   return (
     <Component
       testID={`navigation.messages`}
-      name="wechat"
+      name={focused ? 'message-text' : 'message-text-outline'}
       size={32}
       style={{marginTop: 3, color:
         focused ? colors.navigationTabActive :
