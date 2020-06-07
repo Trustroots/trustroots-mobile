@@ -12,6 +12,32 @@ type Props = {
   username: string
 }
 
+const section = (label: string, withSeparator: boolean = true) =>
+  <>
+    {!!withSeparator && <View style={styles.separator} />}
+    <Text style={styles.sectionHeader}>
+      {label}
+    </Text>
+  </>
+
+const info = (label: string, info: string) =>
+  <Text style={styles.text}>
+    {label ? label + ' ' : ''}
+    <Text style={styles.bold}>
+      {info}
+    </Text>
+  </Text>
+
+const button = (label: string, onPress: () => void) =>
+  <TouchableOpacity
+    onPress={onPress}
+    style={styles.button}
+  >
+    <Text>
+      {label}</Text>
+  </TouchableOpacity>
+
+
 export default ({username}: Props) => {
   const profile: User = useSelector((state: any) => state.profiles[username]) || {}
       , { width, height } = useWindowDimensions()
@@ -48,53 +74,38 @@ export default ({username}: Props) => {
               </TouchableOpacity>
             </View>
           </View>
-          <Text style={styles.sectionHeader}>
-            Accommodation
-          </Text>
+
+          {section('Accommodation', false)}
+
           <View style={styles.accommodation}>
             <View style={styles.hosting} />
             <Text>Might be able to host</Text>
           </View>
-          <TouchableOpacity style={[styles.button]}>
-            <Text>See details</Text>
-          </TouchableOpacity>
-          <View style={styles.separator} />
-          <Text style={styles.text}>
-            {birthdayAndGender(profile)}
-          </Text>
 
-          <Text style={styles.text}>
-            {profile.description.replace(/<.+?>/g, '')}
-          </Text>
+          {button('See details', () => null)}
 
-          <Text style={styles.text}>
-            Member since {moment(profile.created).format('MMM Do, YYYY')}
-          </Text>
+          {section('Basic info', true)}
 
-          <Text style={styles.text}>
-            Online {moment(profile.seen).fromNow()}
-          </Text>
+          {info('Online', moment(profile.seen).fromNow())}
 
-          {!!profile.locationLiving &&
-            <Text style={styles.text}>
-              Lives in {profile.locationLiving}
-            </Text>
-          }
-          {!!profile.locationFrom &&
-            <Text style={styles.text}>
-              From {profile.locationFrom}
-            </Text>
-          }
+          {info('', birthdayAndGender(profile))}
+
+          {info('Member since', moment(profile.created).format('MMM Do, YYYY'))}
+
+          {!!profile.locationLiving && info('Lives in', profile.locationLiving)}
+
+          {!!profile.locationFrom && info('From', profile.locationFrom)}
+
           {!!profile.languages.length &&
-            <>
-              <Text style={styles.label}>
-                Languages
-              </Text>
-              <Text style={styles.text}>
-                {profile.languages.join(', ')}
-              </Text>
-            </>
+            info('Languages', profile.languages.join(', '))
           }
+          {button('Read more', () => null)}
+
+          {section('Contacts', true)}
+
+          {section('Tribes', true)}
+
+          {section('Elsewhere', true)}
         </>
       :
         <ActivityIndicator
@@ -131,7 +142,10 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   text: {
-    marginTop: 5,
+    marginTop: 10
+  },
+  bold: {
+    fontWeight: 'bold'
   },
   label: {
     textTransform: 'uppercase',
@@ -144,6 +158,7 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   button: {
+    marginTop: 10,
     paddingLeft: 20,
     paddingRight: 20,
     paddingTop: 10,
@@ -157,7 +172,6 @@ const styles = StyleSheet.create({
   },
   accommodation: {
     flexDirection: 'row',
-    marginBottom: 10
   },
   hosting: {
     width: 20,
@@ -171,5 +185,5 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20,
     backgroundColor: '#888'
-  }
+  },
 })

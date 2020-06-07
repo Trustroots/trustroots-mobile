@@ -28,4 +28,4 @@ export const userImageURL = (user: UserReference | User, size: number = 64): str
 
 export const birthdayAndGender = (user: User): string =>
   (user.birthdate ? calculateAge(user.birthdate) + ' years, ' : '') +
-  user.gender
+  user.gender + '.'
