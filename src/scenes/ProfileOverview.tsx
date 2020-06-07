@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, ScrollView, Text, ActivityIndicator, useWindowDimensions } from 'react-native'
 import { useSelector } from 'react-redux'
-import Image from 'react-native-fast-image'
+import RoundedImage from '../components/RoundedImage'
 import { User } from '../declarations'
 import colors from '../common/colors'
 import { userImageURL, birthdayAndGender } from '../common/utils'
@@ -20,9 +20,9 @@ export default ({username}: Props) => {
     <ScrollView style={styles.container}>
       {profile._id ?
         <>
-          <Image
-            source={{uri: userImageURL(profile, 512)}}
-            style={{width: imageSize, height: imageSize}}
+          <RoundedImage
+            uri={userImageURL(profile, 512)}
+            size={imageSize}
           />
           {!!profile.tagline &&
             <Text style={styles.tagline}>

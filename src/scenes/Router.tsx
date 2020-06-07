@@ -84,6 +84,7 @@ const App = () => {
               title="Your profile"
               component={Profile}
               icon={icon('account-circle')}
+              initial
             />
           </Tabs>
         </RouterDrawer>
