@@ -6,4 +6,8 @@ export default {
     },
     textShadowColor: 'rgba(0, 0, 0, 0.6)'
   },
+
+  big: {
+    fontSize: 20
+  }
 }

@@ -42,7 +42,7 @@ const App = () => {
         navigationBarStyle={{backgroundColor: colors.background}}
         hideNavBar
       >
-        <Scene key="loading" component={Loading} initial />
+        <Scene key="loading" component={Loading} />
         <Scene key="welcome" component={Welcome} />
         <Scene key="login" component={Login} />
 
@@ -60,6 +60,7 @@ const App = () => {
           contentComponent={Drawer}
           drawerIcon={() => <DrawerIcon />}
           drawerWidth={240}
+          initial
         >
           <Tabs
             key="main"

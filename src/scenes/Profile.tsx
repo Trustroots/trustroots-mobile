@@ -7,7 +7,6 @@ import colors from '../common/colors'
 import ProfileOverview from './ProfileOverview'
 import { useDispatch, useSelector } from 'react-redux'
 import { PROFILE_REQUEST } from '../common/constants'
-import { User } from '../declarations'
 
 type Props = {
   username?: string
@@ -21,8 +20,8 @@ type TabState = NavigationState<{
 const routes = [
   { key: 'overview', title: 'Overview' },
   { key: 'about', title: 'About' },
-  { key: 'tribes', title: 'Tribes' },
   { key: 'hosting', title: 'Hosting' },
+  { key: 'tribes', title: 'Tribes' },
   { key: 'contacts', title: 'Contacts' },
 ]
 
