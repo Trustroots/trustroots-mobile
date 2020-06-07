@@ -9,7 +9,8 @@ import moment from 'moment'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 type Props = {
-  username: string
+  username: string,
+  jumpTo: (page: string) => null
 }
 
 const section = (label: string, withSeparator: boolean = true) =>
@@ -38,7 +39,7 @@ const button = (label: string, onPress: () => void) =>
   </TouchableOpacity>
 
 
-export default ({username}: Props) => {
+export default ({username, jumpTo}: Props) => {
   const profile: User = useSelector((state: any) => state.profiles[username]) || {}
       , { width, height } = useWindowDimensions()
       , imageSize = Math.min(width, height) * .5
@@ -82,7 +83,7 @@ export default ({username}: Props) => {
             <Text>Might be able to host</Text>
           </View>
 
-          {button('See details', () => null)}
+          {button('See details', () => jumpTo('hosting'))}
 
           {section('Basic info', true)}
 
@@ -99,11 +100,13 @@ export default ({username}: Props) => {
           {!!profile.languages.length &&
             info('Languages', profile.languages.join(', '))
           }
-          {button('Read more', () => null)}
+          {button('Read more', () => jumpTo('about'))}
 
           {section('Contacts', true)}
+          {button('Read more', () => jumpTo('contacts'))}
 
           {section('Tribes', true)}
+          {button('Read more', () => jumpTo('tribes'))}
 
           {section('Elsewhere', true)}
         </>

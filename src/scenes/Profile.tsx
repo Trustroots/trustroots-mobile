@@ -51,9 +51,9 @@ export default ({username}: Props) => {
       navigationState={{routes, index}}
       renderTabBar={renderTabBar}
       onIndexChange={setIndex}
-      renderScene={({route}) => {
+      renderScene={({route, jumpTo}) => {
         switch(route.key) {
-          case 'overview': return <ProfileOverview username={display} />
+          case 'overview': return <ProfileOverview username={display} jumpTo={jumpTo} />
           default: return <Empty />
         }
       }}
