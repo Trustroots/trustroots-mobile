@@ -52,13 +52,32 @@
     "@types/react-test-renderer": "^16.9.2",
     "babel-jest": "^26.0.1",
     "eslint": "^7.0.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "husky": "^4.2.5",
     "jest": "^26.0.1",
+    "lint-staged": "^10.2.11",
     "metro-react-native-babel-preset": "^0.59.0",
+    "prettier": "^2.0.5",
     "react-native-svg-transformer": "^0.14.3",
     "react-test-renderer": "16.11.0",
     "typescript": "^3.9.3"
   },
   "jest": {
     "preset": "react-native"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml}": [
+      "prettier --write"
+    ]
   }
 }
